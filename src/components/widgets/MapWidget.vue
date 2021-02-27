@@ -2,11 +2,11 @@
   <l-map
     ref="map"
     id="map-leaflet"
-    key="1"
-    :zoom="mapInitialZoom"
-    :center="mapInitialCenter"
-    :max-zoom="16"
-    :min-zoom="13"
+    :key="`map-key-${_key}`"
+    :zoom="Number(zoom)"
+    :center="center"
+    :min-zoom="Number(minZoom)"
+    :max-zoom="Number(maxZoom)"
     @click="addMarker"
     @update:center="doMoveCenter"
     @update:zoom="doMoveZoom"
@@ -15,12 +15,12 @@
   >
     <l-tilelayer :url="url" :attribution="attribution"></l-tilelayer>
 
-    <l-marker key="current-position" l-if="mapCurrentPosition" :lat-lng="mapCurrentPosition" />
+    <l-marker key="current-position" v-if="mapCurrentPosition" :lat-lng="mapCurrentPosition" />
   </l-map>
 </template>
 
 <script lang='ts'>
-import { Vue, Component, Watch } from 'vue-property-decorator';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 import { LatLng, latLng, LocationEvent } from 'leaflet';
 import {
   LMap,
@@ -49,6 +49,9 @@ Icon.Default.mergeOptions({
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
+
+const palmiraCenter = latLng(22.241354, -80.392777);
+
 @Component({
   components: {
     'l-map': LMap,
@@ -62,23 +65,43 @@ Icon.Default.mergeOptions({
     'l-circle-marker': LCircleMarker,
   },
 })
-export default class MapForm extends Vue {
-  url = 'maps/{z}/{x}/{y}.png';
-  // url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-  attribution =
-    '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+export default class MapWidget extends Vue {
+  created() {
+    this.mapCenter = this.center;
+    this.mapZoom = this.zoom;
+    this.mapCurrentPosition = this.marker
+      ? latLng(this.marker.lat, this.marker.lng)
+      : null;
+    this._key++;
+  }
 
-  mapInitialZoom = 14;
-  mapZoom = this.mapInitialZoom;
-  mapInitialCenter: LatLng = latLng(22.23988857204354, -80.3904175758362);
-  mapCenter: LatLng = this.mapInitialCenter;
+  @Prop({
+    type: Object,
+    default: () => palmiraCenter,
+  })
+  readonly center!: LatLng;
+
+  @Prop({ type: [Number, String], default: 15 }) readonly zoom!: number;
+
+  @Prop({ type: Object }) readonly marker!: LatLng;
+  @Prop({ type: [Number, String], default: 15 }) readonly minZoom!: number;
+  @Prop({ type: [Number, String], default: 18 }) readonly maxZoom!: number;
+  @Prop(Boolean) readonly noEdit!: boolean;
+
+  _key = 0;
+  attribution = '&copy; Palrey';
+  // attribution = '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+  mapCenter: LatLng = palmiraCenter;
+  mapZoom = 15;
   mapCurrentPosition: LatLng | null = null;
 
-  @Watch('reset')
-  onResetChange() {
-    this.doMoveCenter(this.mapInitialCenter);
-    this.doMoveZoom(this.mapInitialZoom);
-    this.mapCurrentPosition = null;
+  get url() {
+    if (this.mapZoom > 16) {
+      this.$emit('internetRequired', true);
+      return 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    }
+    this.$emit('internetRequired', false);
+    return 'maps/{z}/{x}/{y}.png';
   }
 
   mapReady() {
@@ -86,7 +109,10 @@ export default class MapForm extends Vue {
   }
 
   addMarker(event: LocationEvent) {
-    this.mapCurrentPosition = latLng(event.latlng.lat, event.latlng.lng);
+    if (!this.noEdit) {
+      this.mapCurrentPosition = latLng(event.latlng.lat, event.latlng.lng);
+      this.$emit('positionSet', this.mapCurrentPosition);
+    }
   }
 
   /**
