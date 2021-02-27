@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { AppRestoredResult, CameraOptions, NetworkStatus, Plugins, ToastShowOptions, FilesystemDirectory, FileWriteResult } from '@capacitor/core';
+import { AppRestoredResult, CameraOptions, NetworkStatus, Plugins, ToastShowOptions, FilesystemDirectory, FileWriteResult, LocalNotification, LocalNotifications } from '@capacitor/core';
 import { IDictionary } from 'src/types';
-const { App, Camera, Filesystem, Storage, Toast, Network } = Plugins;
+const { App, Camera, Filesystem, Network, Storage, Toast } = Plugins;
 
 interface IOnDownloadEvent
 {
@@ -44,6 +44,12 @@ export class CapacitorHelper
     })
   }
 
+  /**
+   * Files system download app update
+   * @param _url 
+   * @param [_params] 
+   * @returns Promise<FileWriteResult>
+   */
   FileSystem_downloadAppUpdate (_url: string, _params?: IDictionary<unknown>): Promise<FileWriteResult>
   {
     return new Promise((_resolve, _reject) =>
@@ -82,6 +88,19 @@ export class CapacitorHelper
       }).catch(_err => _reject(_err))
     })
   }
+
+  /**
+   * Locals notifications schedule
+   * @param _notifications 
+   * @returns  
+   */
+  static LocalNotifications_schedule (_notifications: LocalNotification[])
+  {
+    return LocalNotifications.schedule({
+      notifications: _notifications
+    });
+  }
+
   /**
    * Get network status
    */
