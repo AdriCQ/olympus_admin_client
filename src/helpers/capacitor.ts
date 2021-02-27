@@ -1,13 +1,20 @@
 import axios from 'axios';
-import { AppRestoredResult, CameraOptions, FilesystemDirectory, NetworkStatus, Plugins, ToastShowOptions } from '@capacitor/core';
+import { AppRestoredResult, CameraOptions, NetworkStatus, Plugins, ToastShowOptions, FilesystemDirectory, FileWriteResult } from '@capacitor/core';
 import { IDictionary } from 'src/types';
-const { App, Camera, Storage, Toast, Filesystem, Network } = Plugins;
+const { App, Camera, Filesystem, Storage, Toast, Network } = Plugins;
 
+interface IOnDownloadEvent
+{
+  loaded: number;
+  total: number;
+}
 /**
  * Capacitor Helper
  */
 export class CapacitorHelper
 {
+
+  downloadProgress = 0;
   /**
    * Exit App
    */
@@ -37,25 +44,44 @@ export class CapacitorHelper
     })
   }
 
-  // FileSystem_updateApplication (_url: string, _params: IDictionary<unknown>)
-  // {
-  //   return new Promise((_resolve, _reject) =>
-  //   {
-  //     void axios.get(_url, {
-  //       responseType: 'blob',
-  //       params: _params
-  //     }).then(_axiosResponse =>
-  //     {
-  //       void Filesystem.writeFile({
-  //         path: 'apks/file.apk',
-  //         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  //         data: _axiosResponse.data,
-  //         directory: FilesystemDirectory.Documents,
-  //       })
-  //     })
-  //   })
-
-  // }
+  FileSystem_downloadAppUpdate (_url: string, _params?: IDictionary<unknown>): Promise<FileWriteResult>
+  {
+    return new Promise((_resolve, _reject) =>
+    {
+      void axios.get(_url, {
+        responseType: 'blob',
+        params: _params,
+        // Handle Download Progress
+        onDownloadProgress: (_event: IOnDownloadEvent) =>
+        {
+          this.downloadProgress = Math.round(
+            (_event.loaded / _event.total) * 100
+          )
+        }
+      }).then(_axiosResponse =>
+      {
+        // Turn blob into base64
+        void new Promise((_bResolve, _bReject) =>
+        {
+          const reader = new FileReader();
+          reader.onerror = _bReject;
+          reader.onload = () =>
+          {
+            _bResolve(reader.result)
+          }
+          reader.readAsDataURL(_axiosResponse.data);
+        }).then((_reader: unknown) =>
+        {
+          void Filesystem.writeFile({
+            path: 'file.apk',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            data: _reader as string,
+            directory: FilesystemDirectory.Documents,
+          }).then(_result => _resolve(_result)).catch(_err => _reject(_err))
+        }).catch(_err => _reject(_err))
+      }).catch(_err => _reject(_err))
+    })
+  }
   /**
    * Get network status
    */
