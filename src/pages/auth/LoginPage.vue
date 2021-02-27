@@ -4,8 +4,6 @@
       <q-card class="login-form">
         <q-card-section>
           <div class="text-h6 text-center q-mb-xs">Inicio de Sesión</div>
-          <img :src="imageSrc" />
-
           <q-input name="user" v-model="loginForm.mobile_phone" label="Telefono">
             <template v-slot:before>
               <q-icon name="mdi-phone" />
@@ -42,8 +40,6 @@ export default class LoginPage extends Vue {
     mobile_phone: '',
     password: '',
   };
-
-  imageSrc: string | undefined = '';
 
   login() {
     this.$q.loading.show();

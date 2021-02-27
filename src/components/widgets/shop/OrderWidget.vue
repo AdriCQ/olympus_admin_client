@@ -1,7 +1,7 @@
 <template>
   <q-card>
     <q-card-section>
-      <div class="text-subtitle2">{{ `${order.customer.first_name} ${order.customer.last_name}` }}</div>
+      <div class="text-subtitle2">{{ order.customer.name }}</div>
       <div class="text-subtitle2">
         <q-icon name="mdi-phone" />
         {{ order.customer.mobile_phone }}

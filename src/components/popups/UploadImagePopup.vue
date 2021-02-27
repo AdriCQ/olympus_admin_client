@@ -43,11 +43,11 @@ export default class UploadImagePopup extends Vue {
   @Prop(Boolean) readonly value!: boolean;
   @Prop(Object) readonly product!: IShopStore.Product;
 
-  onUploaded(info: unknown) {
+  onUploaded(/* info: unknown */) {
     this.$router.back();
   }
 
-  factoryFn(files: File[]) {
+  factoryFn(/* files: File[] */) {
     // returning a Promise
 
     return new Promise((resolve) => {
