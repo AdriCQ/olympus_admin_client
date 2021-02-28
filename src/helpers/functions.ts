@@ -8,7 +8,7 @@ export class FunctionHelper
   static handleImage (_image: IImage, _size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'sm')
   {
     const localImages = [
-      { id: 1, path: 'images/default.png' },
+      { id: 1, path: 'img/default.png' },
     ];
     const search = localImages.find(_findImage =>
     {

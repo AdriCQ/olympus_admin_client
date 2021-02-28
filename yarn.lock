@@ -1256,6 +1256,13 @@
   dependencies:
     source-map "^0.6.1"
 
+"@types/vuelidate@^0.7.13":
+  version "0.7.13"
+  resolved "http://localhost:4873/@types%2fvuelidate/-/vuelidate-0.7.13.tgz#6e7249e1d6b72b3aed14f4439a082e14662c485e"
+  integrity sha512-CFyaS5yov3HjwoZrQyehiE1cNkyuN0/EDQfpeneWQFC9onJ0ieQL6dgFxN6zzPMHDZ87If3UH9WcgkPB4vbcoQ==
+  dependencies:
+    vue "^2.6.11"
+
 "@types/webpack-bundle-analyzer@3.8.0":
   version "3.8.0"
   resolved "http://localhost:4873/@types%2fwebpack-bundle-analyzer/-/webpack-bundle-analyzer-3.8.0.tgz#d1f196f95159254f76a3c2283c4677585bdf354d"
@@ -5225,21 +5232,6 @@ lazystream@^1.0.0:
   dependencies:
     readable-stream "^2.0.5"
 
-leaflet-editablecirclemarker@^1.0.4:
-  version "1.0.4"
-  resolved "http://localhost:4873/leaflet-editablecirclemarker/-/leaflet-editablecirclemarker-1.0.4.tgz#07e3eb9e42ec2ad77c33bcbfb6e368fcb4c94ec4"
-  integrity sha512-0E4GCbgyzZc5G2GP71cLfam2IMBa7C0JY+ayrUNIhQxkz1imHrl46TthGup9+EeZe6pZ0XOCWiT7HBBrrLZ06w==
-
-leaflet.locatecontrol@^0.66.2:
-  version "0.66.2"
-  resolved "http://localhost:4873/leaflet.locatecontrol/-/leaflet.locatecontrol-0.66.2.tgz#a99023b53a7b71d694b02efe4e8aeab7b1789202"
-  integrity sha512-33xCfRydyjLfh9nGvf4kSTM0tA1EFFgM0z4uj75QkUwIc9cz0vJqWABsyDirLm1GBKeEr8/krcnc10X1YuK7oA==
-
-leaflet.markercluster@^1.4.1:
-  version "1.4.1"
-  resolved "http://localhost:4873/leaflet.markercluster/-/leaflet.markercluster-1.4.1.tgz#b53f2c4f2ca7306ddab1dbb6f1861d5e8aa6c5e5"
-  integrity sha512-ZSEpE/EFApR0bJ1w/dUGwTSUvWlpalKqIzkaYdYB7jaftQA/Y2Jav+eT4CMtEYFj+ZK4mswP13Q2acnPBnhGOw==
-
 leaflet@^1.7.1:
   version "1.7.1"
   resolved "http://localhost:4873/leaflet/-/leaflet-1.7.1.tgz#10d684916edfe1bf41d688a3b97127c0322a2a19"
@@ -8561,36 +8553,20 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "http://localhost:4873/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue2-leaflet-editablecirclemarker@^1.0.5:
-  version "1.0.5"
-  resolved "http://localhost:4873/vue2-leaflet-editablecirclemarker/-/vue2-leaflet-editablecirclemarker-1.0.5.tgz#2fdf098f164c54ba1ca9b26038e57aca7417e0b0"
-  integrity sha512-W0/m26e+lFv4+NJWzFs+ACnmVMv+I5WNkogO8gmrmdxqIPrlEcyu6qUXGqP8s3NGgCJfoB8fPdZtlT56Orbcmg==
-  dependencies:
-    leaflet-editablecirclemarker "^1.0.4"
-
-vue2-leaflet-locatecontrol@^1.0.1:
-  version "1.0.1"
-  resolved "http://localhost:4873/vue2-leaflet-locatecontrol/-/vue2-leaflet-locatecontrol-1.0.1.tgz#db97b6c4d0b0f4e37fc1487307f59f00f6e59764"
-  integrity sha512-ATGvAlRi+odc0HvrDMQJGeQiXlEUyplDwQWEs+TKvBTQfZ8WtIGQgBhgoV8216Tf0SRclcaqm6qBLOIdq5UkiA==
-  dependencies:
-    leaflet.locatecontrol "^0.66.2"
-
-vue2-leaflet-markercluster@^3.1.0:
-  version "3.1.0"
-  resolved "http://localhost:4873/vue2-leaflet-markercluster/-/vue2-leaflet-markercluster-3.1.0.tgz#aec30b76846dc311bb5bd6ce63ec7eeabc3d9434"
-  integrity sha512-v94tns6/PmBlFaPY2XvCUL69yUwRO43qYAP7T9hLmPDdu3Vgl15SDcC1qara8M56aNzWMPAcfP/uy4toUE5wcA==
-  dependencies:
-    leaflet.markercluster "^1.4.1"
-
 vue2-leaflet@^2.6.0:
   version "2.6.0"
   resolved "http://localhost:4873/vue2-leaflet/-/vue2-leaflet-2.6.0.tgz#c83c60a745fbc2a74d9dbd0f75b2a5ae07d220a9"
   integrity sha512-JG+w9TtNuk1yRpPta+RjzH6J+opdRUPzSo8UuBnwk+a/6XD0f2tsaB6g3D6ZpBgIE4wZA2dbZ0dZFz2ulYMj3A==
 
-vue@2.6.12:
+vue@2.6.12, vue@^2.6.11:
   version "2.6.12"
   resolved "http://localhost:4873/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
+
+vuelidate@^0.7.6:
+  version "0.7.6"
+  resolved "http://localhost:4873/vuelidate/-/vuelidate-0.7.6.tgz#84100c13b943470660d0416642845cd2a1edf4b2"
+  integrity sha512-suzIuet1jGcyZ4oUSW8J27R2tNrJ9cIfklAh63EbAkFjE380iv97BAiIeolRYoB9bF9usBXCu4BxftWN1Dkn3g==
 
 vuex-class-modules@^1.2.0:
   version "1.2.0"

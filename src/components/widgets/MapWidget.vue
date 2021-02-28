@@ -21,7 +21,7 @@
 
 <script lang='ts'>
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { LatLng, latLng, LocationEvent } from 'leaflet';
+import { LatLng, latLng, LocationEvent, Icon } from 'leaflet';
 import {
   LMap,
   LTileLayer,
@@ -33,7 +33,6 @@ import {
   LCircleMarker,
   LTooltip,
 } from 'vue2-leaflet';
-import { Icon } from 'leaflet';
 
 /* Fix leaflet icons */
 type D = Icon.Default & {

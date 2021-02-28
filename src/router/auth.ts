@@ -8,8 +8,8 @@ export const authRoutes: RouteConfig = {
     {
       name: 'auth.login',
       path: 'login',
-      component: () => import('src/pages/auth/LoginPage.vue'),
-      // component: () => import('src/components/widgets/Map.vue'),
+      component: () => import('pages/auth/LoginPage.vue'),
+      // component: () => import('pages/Index.vue'),
     },
   ],
 };
