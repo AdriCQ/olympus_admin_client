@@ -36,11 +36,12 @@ class ShopOrderModule extends VuexModule
     return new Promise((_resolve, _reject) =>
     {
       void ServiceProvider.callableService(
-        ShopOrderService.list(_params),
+        ShopOrderService.vList(_params),
         ((_resp: IServices.PaginatedData<IShopStore.Order[]>) =>
         {
           _resp.next_page_url ? this.orderNextPaginationPage = _resp.current_page + 1 : this.orderNextPaginationPage = null;
           _resp.prev_page_url ? this.orderPrevPaginationPage = _resp.current_page - 1 : this.orderPrevPaginationPage = null;
+          console.log('Orders Storage', _resp);
           _resolve(_resp);
         })
       ).catch(_error => _reject(_error))

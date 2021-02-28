@@ -20,7 +20,7 @@ export class ShopOrderService
    * @param _params 
    * @returns orders 
    */
-  public static listVendor (_params: IShopService.ListOrdersRequest): IServices.ApiResponsePaginated<IShopStore.Order[]> 
+  public static vList (_params: IShopService.ListOrdersRequest): IServices.ApiResponsePaginated<IShopStore.Order[]> 
   {
     return axios.get(this.BASE_PATH + '/v-list', {
       params: _params

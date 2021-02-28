@@ -24,7 +24,12 @@ export const AuthGuard: NavigationGuard = (to, from, next) =>
     {
       next();
     }
-  }).catch(_err => alert(String(_err)));
+  }).catch(_err => next({
+    name: 'auth.login',
+    query: {
+      redirect: to.name
+    }
+  }));
 
 }
 
@@ -32,12 +37,16 @@ export const NoAuthGuard: NavigationGuard = (to, from, next) =>
 {
   void UserStore.getFromLocalStorage().then(() =>
   {
-
     if (UserStore.isLogged)
     {
       next({
         name: 'main.home'
       })
     }
-  }).catch(_err => alert(String(_err)));
+  }).catch(_err => next({
+    name: 'auth.login',
+    query: {
+      redirect: to.name
+    }
+  }));
 }
