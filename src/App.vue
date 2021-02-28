@@ -10,9 +10,10 @@ import { Vue, Component } from 'vue-property-decorator';
 @Component
 export default class App extends Vue {
   created() {
-    this.$q.loading.setDefaults({
-      // @ts-ignore
-      spinner: QSpinnerTail,
+    this.$q.loadingBar.setDefaults({
+      color: 'accent',
+      size: '0.3rem',
+      position: 'top',
     });
   }
 }

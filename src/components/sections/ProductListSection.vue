@@ -35,14 +35,14 @@ import { ShopProductStore, AppStore } from 'src/store/modules';
 export default class ProductListSection extends Vue {
   beforeMount() {
     if (this.preload) {
-      this.$q.loading.show();
+      this.$q.loadingBar.start();
       ShopProductStore.listByVendorAction({})
         .then((_resp) => {
           ShopProductStore.setProducts(_resp.data);
         })
         .catch((_err) => AppStore.handleErrors(_err))
         .finally(() => {
-          this.$q.loading.hide();
+          this.$q.loadingBar.stop();
         });
     }
   }

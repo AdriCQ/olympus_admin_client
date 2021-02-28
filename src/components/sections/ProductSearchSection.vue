@@ -52,7 +52,7 @@ export default class ProductSearchSection extends Vue {
   };
 
   search() {
-    this.$q.loading.show();
+    this.$q.loadingBar.start();
     ShopProductStore.filterAction(this.form)
       .then(() => {
         // console.log(_resp.data);
@@ -63,7 +63,7 @@ export default class ProductSearchSection extends Vue {
       })
       .catch((_err) => AppStore.handleErrors(_err))
       .finally(() => {
-        this.$q.loading.hide();
+        this.$q.loadingBar.stop();
       });
   }
 }

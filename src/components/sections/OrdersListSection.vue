@@ -87,7 +87,7 @@ export default class OrdersListSection extends Mixins(AppMixin) {
 
   loadData(_params: IShopService.ListOrdersRequest) {
     this.scrollTop();
-    this.$q.loading.show();
+    this.$q.loadingBar.start();
     ShopOrderStore.setOrders([]);
     void ShopOrderStore.listOrders(_params)
       .then((_resp) => {
@@ -97,7 +97,7 @@ export default class OrdersListSection extends Mixins(AppMixin) {
         AppStore.handleErrors(error);
       })
       .finally(() => {
-        this.$q.loading.hide();
+        this.$q.loadingBar.stop();
       });
   }
 }

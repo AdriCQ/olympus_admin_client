@@ -76,14 +76,14 @@ import { ShopProductStore, AppStore } from 'src/store/modules';
 })
 export default class ProductEditPage extends Mixins(AppMixin) {
   beforeMount() {
-    this.$q.loading.show();
+    this.$q.loadingBar.start();
     if (this.productId) {
       ShopProductStore.getByIdAction(Number(this.productId))
         .then((_resp) => {
           this.product = _resp;
         })
         .catch((_err) => AppStore.handleErrors(_err))
-        .finally(() => this.$q.loading.hide());
+        .finally(() => this.$q.loadingBar.stop());
     }
     this.scrollTop();
   }
@@ -121,7 +121,7 @@ export default class ProductEditPage extends Mixins(AppMixin) {
   }
 
   submit() {
-    this.$q.loading.show();
+    this.$q.loadingBar.start();
     ShopProductStore.updateAction({
       product_id: Number(this.product?.id),
       title: this.product?.title,
@@ -133,10 +133,10 @@ export default class ProductEditPage extends Mixins(AppMixin) {
     })
       .then(() => {
         this.$router.back();
-        this.$q.loading.hide();
+        this.$q.loadingBar.stop();
       })
       .catch((_err) => AppStore.handleErrors(_err))
-      .finally(() => this.$q.loading.hide());
+      .finally(() => this.$q.loadingBar.stop());
   }
 }
 </script>

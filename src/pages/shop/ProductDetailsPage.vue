@@ -52,14 +52,14 @@ import { IImage, IShopStore } from 'src/types';
 @Component
 export default class ProductDetailsPage extends Mixins(AppMixin) {
   beforeMount() {
-    this.$q.loading.show();
+    this.$q.loadingBar.start();
     if (this.productId) {
       ShopProductStore.getByIdAction(Number(this.productId))
         .then((_resp) => {
           this.product = _resp;
         })
         .catch((_err) => AppStore.handleErrors(_err))
-        .finally(() => this.$q.loading.hide());
+        .finally(() => this.$q.loadingBar.stop());
     }
     this.scrollTop();
   }
