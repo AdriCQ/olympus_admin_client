@@ -24,15 +24,6 @@ export class CapacitorHelper
   }
 
   /**
-   * Get a Camera photo
-   * @param _options CameraOptions
-   */
-  static Camera_getPhoto (_options: CameraOptions)
-  {
-    return Camera.getPhoto(_options)
-  }
-
-  /**
    * 
    * @param _regsterEvents CallableFunction(_result: AppRestoredResult)
    */
@@ -42,6 +33,15 @@ export class CapacitorHelper
     {
       _regsterEvents(_restoreResult);
     })
+  }
+
+  /**
+   * Get a Camera photo
+   * @param _options CameraOptions
+   */
+  static Camera_getPhoto (_options: CameraOptions)
+  {
+    return Camera.getPhoto(_options)
   }
 
   /**
@@ -110,47 +110,43 @@ export class CapacitorHelper
   }
 
   /**
-   * Set value on localStorage
-   * @param _key string
-   * @param _value unkoun
+   * Clear LocalStorage
    */
-  static Storage_set (_key: string, _value: unknown): Promise<void>
+  static Storage_clear (): Promise<void>
   {
-    return Storage.set({
-      key: _key,
-      value: JSON.stringify(_value)
-    })
+    return Storage.clear();
+  }
+
+  /**
+   * Clear LocalStorage
+   */
+  static Storage_keys (): Promise<{ keys: string[] }>
+  {
+    return Storage.keys();
   }
 
   /**
    * Get data from LocalStorage
    * @param _key string
    */
-  static Storage_get (_key: string): Promise<string | null>
+  static Storage_get<T> (_key: string): Promise<T | null>
   {
     return new Promise((_resolve, _reject) =>
     {
       void Storage.keys().then(_resp =>
       {
-        const keys = _resp.keys;
-        let keyExists = false;
-        keys.filter((_fKey) =>
-        {
-          if (_fKey === _key)
-          {
-            keyExists = true;
-            return;
-          }
-        })
-        if (keyExists)
+        if (_resp.keys.includes(_key))
         {
           void Storage.get({ key: _key }).catch(_err => _reject(_err)).then(_val =>
           {
-            _val ? _resolve(_val.value) : _resolve(null);
+            if (_val)
+            {
+              _val.value ? _resolve(JSON.parse(_val.value)) : _resolve(null)
+            }
           })
         } else
         {
-          _reject(['Key no exists']);
+          _reject(['Key dont exists']);
         }
       }).catch(_error =>
       {
@@ -160,9 +156,9 @@ export class CapacitorHelper
   }
 
   /**
-   * Remove item from LocalStorage
-   * @param _key string
-   */
+     * Remove item from LocalStorage
+     * @param _key string
+     */
   static Storage_remove (_key: string): Promise<void>
   {
     return Storage.remove({
@@ -171,11 +167,16 @@ export class CapacitorHelper
   }
 
   /**
-   * Clear LocalStorage
-   */
-  static Storage_clear (): Promise<void>
+  * Set value on localStorage
+  * @param _key string
+  * @param _value unkoun
+  */
+  static Storage_set (_key: string, _value: unknown): Promise<void>
   {
-    return Storage.clear();
+    return Storage.set({
+      key: _key,
+      value: JSON.stringify(_value)
+    })
   }
 
   /**

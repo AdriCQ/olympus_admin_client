@@ -1,9 +1,15 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-class-modules';
 import { storeInstance } from 'src/store';
 import { IUserService, IUserStore } from 'src/types';
-import { UserInstance } from 'src/helpers';
+import { UserInstance, CapacitorHelper } from 'src/helpers';
 import { ServiceProvider, UserService } from 'src/services';
-import { LocalStorage } from 'quasar'
+
+const STORAGE_KEY = 'vuex/UserStore';
+interface ILocalStorage
+{
+  profile: IUserStore.User;
+  api_token: string | null;
+}
 
 @Module({ generateMutationSetters: true })
 class UserModule extends VuexModule
@@ -60,21 +66,23 @@ class UserModule extends VuexModule
 
   storeOnLocalStorage ()
   {
-    LocalStorage.set('storage/user', {
+    void CapacitorHelper.Storage_set(STORAGE_KEY, {
       api_token: this.api_token,
       profile: this.profile
-    })
+    }).catch(_err => console.log('Error set localstorage user Data', _err));
 
   }
 
   getFromLocalStorage ()
   {
-    if (LocalStorage.has('storage/user'))
+    void CapacitorHelper.Storage_get<ILocalStorage>(STORAGE_KEY).then(_resp =>
     {
-      const localData: IUserService.AuthResponse = LocalStorage.getItem('storage/user') as IUserService.AuthResponse;
-      this.api_token = localData.api_token;
-      this.profile = localData.profile;
-    }
+      if (_resp)
+      {
+        this.api_token = _resp?.api_token;
+        this.profile = _resp?.profile;
+      }
+    }).catch(_err => console.log('Error getting localstorage user data', _err));
   }
 }
 
