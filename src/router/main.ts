@@ -7,6 +7,11 @@ export const mainRoutes: RouteConfig =
   component: () => import('layouts/MainLayout.vue'),
   beforeEnter: AuthGuard,
   children: [
-    { path: '', component: () => import('pages/Index.vue'), name: 'main.home' }
+    {
+      path: '',
+      // component: () => import('pages/Index.vue'),
+      redirect: { name: 'shop.orders' },
+      name: 'main.home'
+    }
   ],
 };

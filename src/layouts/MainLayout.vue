@@ -10,7 +10,7 @@
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
-        <q-toolbar-title>Palrey Admin</q-toolbar-title>
+        <q-toolbar-title></q-toolbar-title>
         <div>Version {{ appVersion }}</div>
       </q-toolbar>
     </q-header>

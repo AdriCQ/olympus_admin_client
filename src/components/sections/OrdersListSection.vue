@@ -1,5 +1,6 @@
 <template>
   <section>
+    <map-popup v-model="mapPopup" :map-options="mapOptions" :address="mapAddress" />
     <q-card>
       <q-card-section>
         <div class="text-h6">{{ sectionTitle }}</div>
@@ -11,7 +12,7 @@
             v-for="(order, orderKey) in orders"
             :key="`order-${orderKey}`"
           >
-            <order-widget :order="order" :key="`${orderKey}`" />
+            <order-widget :order="order" :key="`${orderKey}`" @map="showMap" />
           </div>
         </div>
       </q-card-section>
@@ -34,11 +35,12 @@
 <script lang='ts'>
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 import { AppStore, ShopOrderStore } from 'src/store/modules';
-import { IShopStore, IShopService } from 'src/types';
+import { IShopStore, IShopService, IVue } from 'src/types';
 import { AppMixin } from 'src/mixins';
 
 @Component({
   components: {
+    'map-popup': () => import('components/popups/MapPopup.vue'),
     'order-widget': () => import('components/widgets/shop/OrderWidget.vue'),
   },
 })
@@ -48,6 +50,9 @@ export default class OrdersListSection extends Mixins(AppMixin) {
       status: 'processing',
     });
   }
+  mapPopup = false;
+  mapOptions: IVue.IMapOptions = {};
+  mapAddress = '';
 
   @Prop({ type: String, default: 'processing' })
   readonly orderStatus!: IShopStore.OrderStatus;
@@ -99,6 +104,23 @@ export default class OrdersListSection extends Mixins(AppMixin) {
       .finally(() => {
         this.$q.loadingBar.stop();
       });
+  }
+
+  showMap(_c: { latLng: IVue.ILatLng; shipping_address: string }) {
+    this.mapOptions = {
+      center: {
+        lat: _c.latLng.lat,
+        lng: _c.latLng.lng,
+      },
+      zoom: 16,
+      marker: {
+        lat: _c.latLng.lat,
+        lng: _c.latLng.lng,
+      },
+      noEdit: true,
+    };
+    this.mapAddress = _c.shipping_address;
+    this.mapPopup = true;
   }
 }
 </script>

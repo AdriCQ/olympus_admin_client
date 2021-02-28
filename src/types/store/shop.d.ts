@@ -1,4 +1,5 @@
 import { DBModel, IUserStore, IDictionary, IImage } from 'src/types';
+import { IVue } from '../vue_components';
 
 /**
  * @namespace ShopStore
@@ -26,6 +27,7 @@ export namespace IShopStore
     products: OrderProduct[];
     tax: number;
     shipping_address: string;
+    coordinates: IVue.ILatLng;
     total_products: number;
     status: OrderStatus;
   }

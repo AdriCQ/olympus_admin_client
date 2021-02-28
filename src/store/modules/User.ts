@@ -73,16 +73,21 @@ class UserModule extends VuexModule
 
   }
 
+  @Action
   getFromLocalStorage ()
   {
-    void CapacitorHelper.Storage_get<ILocalStorage>(STORAGE_KEY).then(_resp =>
+    return new Promise((_resolve, _reject) =>
     {
-      if (_resp)
+      CapacitorHelper.Storage_get<ILocalStorage>(STORAGE_KEY).then(_resp =>
       {
-        this.api_token = _resp?.api_token;
-        this.profile = _resp?.profile;
-      }
-    }).catch(_err => console.log('Error getting localstorage user data', _err));
+        if (_resp)
+        {
+          this.api_token = _resp?.api_token;
+          this.profile = _resp?.profile;
+        }
+        _resolve(true);
+      }).catch(_err => _reject(_err));
+    })
   }
 }
 

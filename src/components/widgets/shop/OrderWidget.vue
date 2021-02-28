@@ -11,7 +11,16 @@
         v-for="(productOrder, prodKey) in order.products"
         :key="`product-${prodKey}`"
       >{{ `${productOrder.product_qty} -- ${productOrder.product.title}` }}</p>
-      <div class="text-subtitle2">Dirección</div>
+      <div class="text-subtitle2">
+        <span>Dirección</span>
+        <q-btn
+          icon="mdi-map-marker-radius"
+          class="q-ml-sm"
+          label="Mostrar en Mapa"
+          @click="$emit('map',{ latLng: order.coordinates, shipping_address: order.shipping_address})"
+          size="xs"
+        />
+      </div>
       <p>{{ order.shipping_address }}</p>
       <div class="text-subtitle2">Fecha</div>
       <p>{{ date }}</p>

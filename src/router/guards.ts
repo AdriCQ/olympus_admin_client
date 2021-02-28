@@ -10,28 +10,34 @@ import { NavigationGuard } from 'vue-router';
  */
 export const AuthGuard: NavigationGuard = (to, from, next) =>
 {
-  UserStore.getFromLocalStorage();
-  if (!UserStore.isLogged)
+  void UserStore.getFromLocalStorage().then(() =>
   {
-    next({
-      name: 'auth.login',
-      query: {
-        redirect: to.name
-      }
-    })
-  } else
-  {
-    next();
-  }
+    if (!UserStore.isLogged)
+    {
+      next({
+        name: 'auth.login',
+        query: {
+          redirect: to.name
+        }
+      })
+    } else
+    {
+      next();
+    }
+  }).catch(_err => alert(String(_err)));
+
 }
 
 export const NoAuthGuard: NavigationGuard = (to, from, next) =>
 {
-  UserStore.getFromLocalStorage();
-  if (UserStore.isLogged)
+  void UserStore.getFromLocalStorage().then(() =>
   {
-    next({
-      name: 'main.home'
-    })
-  }
+
+    if (UserStore.isLogged)
+    {
+      next({
+        name: 'main.home'
+      })
+    }
+  }).catch(_err => alert(String(_err)));
 }

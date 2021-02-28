@@ -4,7 +4,6 @@
   </div>
 </template>
 <script lang="ts">
-import { QSpinnerTail } from 'quasar';
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component

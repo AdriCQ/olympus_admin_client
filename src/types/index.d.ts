@@ -23,3 +23,4 @@ export * from './services/user';
  * -----------------------------------------
  */
 export * from './mix'
+export * from './vue_components'

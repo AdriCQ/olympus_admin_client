@@ -13,6 +13,7 @@ export const OrderInstance: IShopStore.Order = {
   products: [],
   shipping_address: '',
   status: 'processing',
+  coordinates: { lat: 0, lng: 0 },
   total_products: 0,
   tax: 0
 }
