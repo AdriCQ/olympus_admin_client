@@ -1,4 +1,4 @@
-import { IServices } from 'src/types';
+import { IServices, IDictionary } from 'src/types';
 
 export class ServiceProvider
 {
@@ -15,9 +15,19 @@ export class ServiceProvider
         else
         {
           const errors: string[] = [];
-          for (const error of _resp.ERRORS as unknown[])
+          if (Array.isArray(_resp.ERRORS))
           {
-            errors.push(String(error));
+            for (const error of _resp.ERRORS as unknown[])
+            {
+              errors.push(String(error));
+            }
+          }
+          else
+          {
+            for (const error in _resp.ERRORS as IDictionary<string | string[]>)
+            {
+              errors.push(String(_resp.ERRORS[error]));
+            }
           }
           reject(errors);
         }

@@ -97,7 +97,6 @@ export default class OrdersListSection extends Mixins(AppMixin) {
     void ShopOrderStore.listOrders(_params)
       .then((_resp) => {
         ShopOrderStore.setOrders(_resp.data);
-        console.log('Orders', _resp.data);
       })
       .catch((error) => {
         AppStore.handleErrors(error);

@@ -14,7 +14,7 @@
             dense
             class="text-teal"
           >
-            <q-tab name="new-product-section" icon="mdi-cart-plus" label="Nuevo" />
+            <!-- <q-tab name="new-product-section" icon="mdi-cart-plus" label="Nuevo" /> -->
             <q-tab name="product-list-section" icon="mdi-format-list-bulleted" label="Listado" />
             <q-tab name="product-search-section" icon="mdi-magnify" label="Buscar" />
           </q-tabs>
