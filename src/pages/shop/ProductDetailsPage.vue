@@ -2,7 +2,7 @@
   <q-page padding>
     <q-card v-if="product">
       <div class="text-center">
-        <img :src="imageSrc" />
+        <img :src="imageSrc" spinner-color="primary" style="width: 100%" />
       </div>
       <q-card-section>
         <div class="text-h6">{{ product.title }}</div>
@@ -70,7 +70,7 @@ export default class ProductDetailsPage extends Mixins(AppMixin) {
     return this.$route.query.product_id;
   }
   get imageSrc() {
-    return FunctionHelper.handleImage(this.product?.image as IImage);
+    return FunctionHelper.handleImage(this.product?.image as IImage, 'lg');
   }
 }
 </script>

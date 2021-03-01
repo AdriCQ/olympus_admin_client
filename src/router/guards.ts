@@ -24,7 +24,7 @@ export const AuthGuard: NavigationGuard = (to, from, next) =>
     {
       next();
     }
-  }).catch(_err => next({
+  }).catch(() => next({
     name: 'auth.login',
     query: {
       redirect: to.name
@@ -43,7 +43,7 @@ export const NoAuthGuard: NavigationGuard = (to, from, next) =>
         name: 'main.home'
       })
     }
-  }).catch(_err => next({
+  }).catch(() => next({
     name: 'auth.login',
     query: {
       redirect: to.name

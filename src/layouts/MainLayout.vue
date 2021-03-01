@@ -20,7 +20,7 @@
         <q-item-label header class="text-grey-8">
           Hola, {{ userName }}
           <span class="float-right">
-            <q-btn size="xs" color="negative" @click="logout" icon="mdi-account-remove" />
+            <q-btn size="xs" @click="logout" icon="mdi-exit-to-app" />
           </span>
         </q-item-label>
         <drawer-link v-for="(link, key) in drawerLinks" :key="key" :link="link" />
@@ -37,6 +37,10 @@
 import { Vue, Component } from 'vue-property-decorator';
 import { AppStore, UserStore } from 'src/store/modules';
 import { ILabelIconLink } from 'src/types';
+
+import { FunctionHelper } from 'src/helpers';
+
+FunctionHelper.notificationsInterval();
 
 @Component({
   components: {

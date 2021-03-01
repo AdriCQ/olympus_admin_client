@@ -1,7 +1,7 @@
 <template>
   <q-card class="cursor-pointer">
     <div class="text-center" @click="details">
-      <img :src="imageSrc" />
+      <img :src="imageSrc" spinner-color="primary" style="width: 100%" />
     </div>
     <q-card-section>
       <!-- <div class="text-subtitle2">{{ product.title }}</div> -->
@@ -43,7 +43,7 @@ export default class ProductWidget extends Vue {
   loading = false;
 
   get imageSrc() {
-    return FunctionHelper.handleImage(this.product.image);
+    return FunctionHelper.handleImage(this.product.image, 'sm');
   }
 
   get onSaleButtonSettings() {

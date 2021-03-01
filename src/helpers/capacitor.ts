@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AppRestoredResult, CameraOptions, NetworkStatus, Plugins, ToastShowOptions, FilesystemDirectory, FileWriteResult, LocalNotification, LocalNotifications } from '@capacitor/core';
+import { AppRestoredResult, CameraOptions, NetworkStatus, Plugins, ToastShowOptions, FilesystemDirectory, FileWriteResult } from '@capacitor/core';
 import { IDictionary } from 'src/types';
 const { App, Camera, Filesystem, Network, Storage, Toast } = Plugins;
 
@@ -94,12 +94,20 @@ export class CapacitorHelper
    * @param _notifications 
    * @returns  
    */
-  static LocalNotifications_schedule (_notifications: LocalNotification[])
-  {
-    return LocalNotifications.schedule({
-      notifications: _notifications
-    });
-  }
+  // static LocalNotifications_schedule (_notifications: LocalNotification[])
+  // {
+  //   LocalNotifications.schedule({
+  //     notifications: [
+  //       {
+  //         title: 'Title',
+  //         body: 'Body',
+  //         id: 1,
+  //         actionTypeId: '',
+  //         extra: null
+  //       }
+  //     ]
+  //   })
+  // }
 
   /**
    * Get network status

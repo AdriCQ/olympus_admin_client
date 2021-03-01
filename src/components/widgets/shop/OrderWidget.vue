@@ -41,7 +41,7 @@
           color="negative"
           size="sm"
           v-if="order.status ==='processing'"
-          @click="changeStatus('canceled')"
+          @click="changeStatus('v-canceled')"
         >
           <q-icon name="mdi-close" />&nbsp; Cancelar
         </q-btn>

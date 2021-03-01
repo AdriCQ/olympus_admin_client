@@ -42,6 +42,7 @@ export class ServiceProvider
   }
 }
 
+export * from './OlympusService';
 export * from './ShopOrder';
 export * from './ShopProductService';
 export * from './UserService';
