@@ -17,6 +17,7 @@ export namespace IShopService
   {
     products: OrderProduct[];
     shipping_address: string;
+    coordinates: { lat: number; lng: number };
     message?: string;
   }
 

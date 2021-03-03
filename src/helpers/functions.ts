@@ -23,6 +23,7 @@ export class FunctionHelper
       { id: 1, paths: { sm: 'img/sm_1.jpg', md: 'img/md_1.jpg', lg: 'img/lg_1.jpg' } },
       { id: 2, paths: { sm: 'img/shop/sm_2.jpg', md: 'img/shop/md_2.jpg', lg: 'img/shop/lg_2.jpg' } },
       { id: 3, paths: { sm: 'img/shop/sm_3.jpg', md: 'img/shop/md_3.jpg', lg: 'img/shop/lg_3.jpg' } },
+      { id: 4, paths: { sm: 'img/shop/sm_4.jpg', md: 'img/shop/md_4.jpg', lg: 'img/shop/lg_4.jpg' } },
     ];
     const search = localImages.find(_findImage =>
     {

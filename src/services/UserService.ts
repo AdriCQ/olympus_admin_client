@@ -6,7 +6,16 @@ import axios from 'axios';
  */
 export class UserService
 {
-  private static BASE_PATH = 'user';
+  private static BASE_PATH = '/user';
+
+  /**
+   * Prepares auth
+   * @returns  
+   */
+  static prepareAuth ()
+  {
+    return axios.get('/sanctum/csrf-cookie');
+  }
 
   /**
    * Logins user service
@@ -36,5 +45,14 @@ export class UserService
   static register (_params: IUserService.RegisterRequest): IServices.ApiResponse<IUserService.AuthResponse>
   {
     return axios.post(this.BASE_PATH + '/register', _params);
+  }
+
+  /**
+   * Logouts user service
+   * @returns  
+   */
+  static logout ()
+  {
+    return axios.post('/auth/logout');
   }
 }

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import axios, { AxiosInstance } from 'axios';
 import { boot } from 'quasar/wrappers';
-import { SERVER_URL, APP_TOKEN } from 'src/helpers';
+import { SERVER_API_URL, APP_TOKEN } from 'src/helpers';
 import { UserStore } from 'src/store/modules';
+// import { UserStore } from 'src/store/modules';
 
 declare module 'vue/types/vue' {
   interface Vue
@@ -17,15 +18,15 @@ export default boot(({ Vue }) =>
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   Vue.prototype.$axios = axios;
   axios.defaults.timeout = 10000;
+  axios.defaults.baseURL = SERVER_API_URL;
+  // axios.defaults.withCredentials = true;
   axios.interceptors.request.use((request) =>
   {
-    request.baseURL = SERVER_URL;
     /* Append content type header if its not present */
     if (!request.headers['Content-Type'])
     {
       request.headers['Content-Type'] = 'application/json';
     }
-
     /* Check if authorization is set */
     if (!request.headers['Authorization'])
     {
@@ -48,7 +49,6 @@ export default boot(({ Vue }) =>
     {
       request.params['ol_app_token'] = APP_TOKEN
     }
-    // console.log(request);
     return request;
   });
 });
