@@ -17,7 +17,7 @@ export default boot(({ Vue }) =>
 {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   Vue.prototype.$axios = axios;
-  axios.defaults.timeout = 10000;
+  axios.defaults.timeout = 30000;
   axios.defaults.baseURL = SERVER_API_URL;
   // axios.defaults.withCredentials = true;
   axios.interceptors.request.use((request) =>

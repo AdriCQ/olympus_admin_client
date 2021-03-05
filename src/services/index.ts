@@ -14,25 +14,26 @@ export class ServiceProvider
         // console.log(_response.data);
         if (_resp.STATUS)
           resolve(_callback(_resp.DATA));
-        // else
-        // {
-        //   const errors: string[] = [];
-        //   if (Array.isArray(_resp.ERRORS))
-        //   {
-        //     for (const error of _resp.ERRORS as unknown[])
-        //     {
-        //       errors.push(String(error));
-        //     }
-        //   }
-        //   else
-        //   {
-        //     for (const error in _resp.ERRORS as IDictionary<string | string[]>)
-        //     {
-        //       errors.push(String(_resp.ERRORS[error]));
-        //     }
-        //   }
-        //   reject(errors);
-        // }
+        else
+        {
+          const errors: string[] = [];
+          const _resp = _error.response?.data;
+          if (Array.isArray(_resp.ERRORS))
+          {
+            for (const error of _resp.ERRORS as unknown[])
+            {
+              errors.push(String(error));
+            }
+          }
+          else
+          {
+            for (const error in _resp.ERRORS as IDictionary<string | string[]>)
+            {
+              errors.push(String(_resp.ERRORS[error]));
+            }
+          }
+          reject(errors);
+        }
       }).catch((_error: AxiosError<IServices.iApiResponse<unknown>>) =>
       {
         // console.log(_error.code);
