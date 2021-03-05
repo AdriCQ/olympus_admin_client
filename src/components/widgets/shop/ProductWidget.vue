@@ -1,12 +1,15 @@
 <template>
   <q-card class="cursor-pointer">
-    <div class="text-center" @click="details">
+    <div class="text-center">
       <img :src="imageSrc" spinner-color="primary" style="width: 100%" />
     </div>
     <q-card-section>
       <!-- <div class="text-subtitle2">{{ product.title }}</div> -->
       <div class="text-subtitle2">{{ product.title }}, ${{ Number(product.sell_price).toFixed(2) }}</div>
       <p>Vendidos: {{ Number(product.sold) }}</p>
+      <p>
+        <q-btn @click="details" size="sm" label="Detalles" />
+      </p>
       <p>
         <q-btn
           :color="onSaleButtonSettings.color"
