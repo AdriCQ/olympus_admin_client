@@ -67,7 +67,7 @@
 import { Vue, Component } from 'vue-property-decorator';
 import { IUserService } from 'src/types';
 import { required, minLength } from 'vuelidate/lib/validators';
-import { UserStore } from 'src/store/modules';
+import { AppStore, UserStore } from 'src/store/modules';
 
 @Component({
   validations: {
@@ -146,12 +146,7 @@ export default class Login extends Vue {
           });
           void this.$router.push({ name: 'main.home' });
         })
-        .catch((_errors: []) =>
-          this.$q.notify({
-            message: _errors.join('\n'),
-            type: 'negative',
-          })
-        )
+        .catch((_errors: []) => AppStore.handleErrors(_errors))
         .finally(() => (this.btnState = false));
     }
   }
