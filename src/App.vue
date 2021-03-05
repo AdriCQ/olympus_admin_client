@@ -9,7 +9,7 @@ import { Vue, Component } from 'vue-property-decorator';
 export default class App extends Vue {
   created() {
     this.$q.loadingBar.setDefaults({
-      color: 'accent',
+      color: 'primary',
       size: '0.3rem',
       position: 'top',
     });

@@ -12,7 +12,7 @@
             outside-arrows
             mobile-arrows
             dense
-            class="text-teal"
+            class="text-dark"
           >
             <!-- <q-tab name="new-product-section" icon="mdi-cart-plus" label="Nuevo" /> -->
             <q-tab name="product-list-section" icon="mdi-format-list-bulleted" label="Listado" />

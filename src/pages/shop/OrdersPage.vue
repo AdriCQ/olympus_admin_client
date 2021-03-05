@@ -2,7 +2,7 @@
   <q-page padding>
     <q-card>
       <q-card-section class="px-none">
-        <q-tabs v-model="orderStatus" no-caps outside-arrows mobile-arrows dense class="text-teal">
+        <q-tabs v-model="orderStatus" no-caps outside-arrows mobile-arrows dense class="text-dark">
           <q-tab name="processing" icon="mdi-cart-plus" label="Nuevas" />
           <q-tab name="accepted" icon="mdi-cart" label="Aceptadas" />
           <q-tab name="v-canceled" icon="mdi-cart-off" label="Canceladas" />

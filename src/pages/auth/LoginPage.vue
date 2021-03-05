@@ -3,8 +3,8 @@
     <div class="row justify-center q-py-md q-px-sm">
       <div class="col-auto">
         <q-btn :to="{name: 'main.home'}" :ripple="false" round unelevated class="q-mb-md">
-          <q-avatar size="70px">
-            <img src="img/logo.png" alt="logo" />
+          <q-avatar size="70px" color="dark">
+            <img src="icons/logo_x98.png" alt="logo" />
           </q-avatar>
         </q-btn>
       </div>
