@@ -1,4 +1,4 @@
-import { IShopStore, IDictionary } from 'src/types';
+import { IShopStore } from 'src/types';
 /**
  * @namespace IShopService
  */
@@ -48,6 +48,7 @@ export namespace IShopService
   {
     order_id: number;
     status: IShopStore.OrderStatus;
+    delivery_time?: Date | null;
   }
 
   /**
@@ -99,6 +100,6 @@ export namespace IShopService
     wholesale_min?: number;
     weight?: number;
     tags?: string[];
-    attributes?: IDictionary<string | number>
+    attributes?: IShopStore.ProductAttributes;
   }
 }

@@ -42,14 +42,16 @@ export namespace IShopStore
   /**
    * @type ShopStore.ProductStockStatus
    */
-  type ProductStockStatus = 'infinity' | 'backorder' | 'limited';
+  type ProductStockStatus = 'limited' | 'infinity' | 'backorder' | 'sold_out';
 
   /**
    * @interface ShopStore.ProductAttributes
    */
   interface ProductAttributes
   {
-    colors: string[]
+    Color?: string[] | null,
+    Relleno?: string[] | null,
+    Sabor?: string[] | null,
   }
 
   /**

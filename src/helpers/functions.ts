@@ -1,10 +1,8 @@
 import { IImage } from 'src/types';
 import { SERVER_URL } from 'src/helpers';
-import { OlympusService } from '../services/OlympusService';
-import { ServiceProvider } from 'src/services';
+import { ServiceProvider, ShopOrderService } from 'src/services';
 
 import { HapticsNotificationType, Plugins } from '@capacitor/core';
-import { ShopOrderStore } from 'src/store/modules';
 const { LocalNotifications, Haptics } = Plugins;
 /**
  * @class Function helper 
@@ -21,9 +19,9 @@ export class FunctionHelper
   {
     const localImages = [
       { id: 1, paths: { sm: 'img/sm_1.jpg', md: 'img/md_1.jpg', lg: 'img/lg_1.jpg' } },
-      { id: 2, paths: { sm: 'img/shop/sm_2.jpg', md: 'img/shop/md_2.jpg', lg: 'img/shop/lg_2.jpg' } },
-      { id: 3, paths: { sm: 'img/shop/sm_3.jpg', md: 'img/shop/md_3.jpg', lg: 'img/shop/lg_3.jpg' } },
-      { id: 4, paths: { sm: 'img/shop/sm_4.jpg', md: 'img/shop/md_4.jpg', lg: 'img/shop/lg_4.jpg' } },
+      { id: 2, paths: { sm: 'img/products/sm_2.jpg', md: 'img/products/md_2.jpg', lg: 'img/products/lg_2.jpg' } },
+      { id: 3, paths: { sm: 'img/products/sm_3.jpg', md: 'img/products/md_3.jpg', lg: 'img/products/lg_3.jpg' } },
+      { id: 4, paths: { sm: 'img/products/sm_4.jpg', md: 'img/products/md_4.jpg', lg: 'img/products/lg_4.jpg' } },
     ];
     const search = localImages.find(_findImage =>
     {
@@ -37,48 +35,29 @@ export class FunctionHelper
    */
   static notificationsInterval ()
   {
-    let counter = 0;
+    // let counter = 0;
     setInterval(() =>
     {
-      void ServiceProvider.callableService(OlympusService.getAdminUnreadNotifications(), ((_resp: string[]) =>
+      void ServiceProvider.callableService(ShopOrderService.countVendorOrders('processing'), ((_resp: number) =>
       {
-
-
-        if (_resp.length)
+        console.log('Counter', _resp);
+        if (Number(_resp) > 0)
         {
           Haptics.vibrate();
           Haptics.notification({
             type: HapticsNotificationType.WARNING
           });
-          _resp.forEach((_notification) =>
-          {
-            void LocalNotifications.schedule({
-              notifications: [
-                {
-                  title: 'Palrey Notification',
-                  body: String(_notification),
-                  id: counter
-                }
-              ]
-            }).catch((_err) => console.log(_err));
-            counter++;
-          })
-
-
-          void ShopOrderStore.listOrders({
-            status: 'processing'
-          })
-            .then((_resp) =>
-            {
-              ShopOrderStore.setOrders(_resp.data);
-            })
-            .catch((error) =>
-            {
-              console.log(error);
-            })
-
+          void LocalNotifications.schedule({
+            notifications: [
+              {
+                title: 'Palrey Notification',
+                body: `${_resp} pedidos nuevos`,
+                id: 1
+              }
+            ]
+          }).catch((_err) => console.log(_err));
         }
       })).catch(_err => console.log(_err));
-    }, 30000)
+    }, 3 * 60 * 1000)
   }
 }

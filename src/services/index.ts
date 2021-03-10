@@ -17,7 +17,6 @@ export class ServiceProvider
         else
         {
           const errors: string[] = [];
-          const _resp = _error.response?.data;
           if (Array.isArray(_resp.ERRORS))
           {
             for (const error of _resp.ERRORS as unknown[])

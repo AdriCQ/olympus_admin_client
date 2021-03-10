@@ -62,4 +62,18 @@ export class ShopOrderService
       }
     })
   }
+
+  /**
+   * Counts vendor orders
+   * @param [_status] 
+   * @returns vendor orders 
+   */
+  public static countVendorOrders (_status?: IShopStore.OrderStatus): IServices.ApiResponse<number>
+  {
+    return axios.get(this.BASE_PATH + '/v-count', {
+      params: {
+        status: _status
+      }
+    })
+  }
 }
