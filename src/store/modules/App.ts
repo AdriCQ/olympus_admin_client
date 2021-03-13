@@ -8,6 +8,8 @@ class AppModule extends VuexModule
   errors: string[] = [];
   version = 0.1;
 
+  palrey_daily_visits = 0;
+
   @Mutation
   handleErrors (_errors: string[])
   {

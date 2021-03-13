@@ -39,4 +39,14 @@ export class OlympusService
   {
     return axios.get(this.BASE_URL + '/notification/a-unread');
   }
+
+  /**
+   * Gets app info
+   * @param _app_token 
+   * @returns app info 
+   */
+  static getAppInfo (_app_token: string): IServices.ApiResponse<IOlympusService.Application> 
+  {
+    return axios.get(this.BASE_URL + '/app', { params: { app_token: _app_token } });
+  }
 }

@@ -11,7 +11,7 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
         <q-toolbar-title></q-toolbar-title>
-        <div>Version {{ appVersion }}</div>
+        <div>Visitas {{ Number(dailyVisits) }}</div>
       </q-toolbar>
     </q-header>
 
@@ -36,9 +36,10 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { AppStore, UserStore } from 'src/store/modules';
-import { ILabelIconLink } from 'src/types';
+import { ILabelIconLink, IOlympusService } from 'src/types';
 
-import { FunctionHelper } from 'src/helpers';
+import { FunctionHelper, PALREY_APP_TOKEN } from 'src/helpers';
+import { ServiceProvider, OlympusService } from 'src/services';
 
 FunctionHelper.notificationsInterval();
 
@@ -48,6 +49,18 @@ FunctionHelper.notificationsInterval();
   },
 })
 export default class MainLayout extends Vue {
+  created() {
+    /**
+     * Get Daily Visits
+     */
+    void ServiceProvider.callableService(
+      OlympusService.getAppInfo(PALREY_APP_TOKEN),
+      (_resp: IOlympusService.Application) => {
+        AppStore.palrey_daily_visits = _resp.daily_visits;
+      }
+    ).catch((_err) => console.log('AppInfoError', _err));
+  }
+
   leftDrawerOpen = false;
   drawerLinks: ILabelIconLink[] = [
     {
@@ -63,13 +76,17 @@ export default class MainLayout extends Vue {
       to: { name: 'shop.products' },
     },
     {
-      icon: 'mdi-account',
-      label: 'Usuario',
+      icon: 'mdi-account-multiple-outline',
+      label: 'Usuarios',
     },
   ];
 
   get appVersion() {
     return AppStore.version;
+  }
+
+  get dailyVisits() {
+    return AppStore.palrey_daily_visits;
   }
 
   get userName() {
