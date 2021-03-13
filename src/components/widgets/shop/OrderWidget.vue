@@ -63,6 +63,7 @@
       <div class="text-subtitle2">
         <span>Dirección</span>
         <q-btn
+          v-if="order.coordinates"
           icon="mdi-map-marker-radius"
           class="q-ml-sm"
           label="Mostrar en Mapa"
@@ -132,7 +133,7 @@ import { date } from 'quasar';
   },
 })
 export default class OrderWidget extends Vue {
-  created(){
+  created() {
     console.log(this.order);
   }
   @Prop({

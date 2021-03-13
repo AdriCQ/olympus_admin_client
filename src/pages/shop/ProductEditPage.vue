@@ -173,7 +173,7 @@ export default class ProductEditPage extends Mixins(AppMixin) {
   }
 
   get availableRelleno() {
-    return ['Coco', 'Guayaba'];
+    return ['Coco', 'Guayaba', 'Chocolate', 'Natilla'];
   }
 
   get attr(): undefined | IShopStore.ProductAttributes {

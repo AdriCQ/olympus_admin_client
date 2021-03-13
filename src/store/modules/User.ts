@@ -76,6 +76,7 @@ class UserModule extends VuexModule
 
   logout ()
   {
+    console.log('Logout')
     this.profile = UserInstance;
     this.api_token = null;
     this.storeOnLocalStorage();

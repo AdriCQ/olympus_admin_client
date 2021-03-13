@@ -44,7 +44,7 @@ import { ILabelIconLink, IOlympusService } from 'src/types';
 import { FunctionHelper, PALREY_APP_TOKEN } from 'src/helpers';
 import { ServiceProvider, OlympusService } from 'src/services';
 
-// FunctionHelper.notificationsInterval();
+FunctionHelper.notificationsInterval();
 
 @Component({
   components: {

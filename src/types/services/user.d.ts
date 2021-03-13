@@ -35,5 +35,6 @@ export namespace IUserService
   {
     mobile_phone?: string;
     name?: string;
+    page?: number;
   }
 }

@@ -20,7 +20,8 @@
         </p>
         <p>
           <b>Inventario ({{ String(product.stock_status).toUpperCase() }}):</b>
-          &nbsp;{{ product.stock_qty }}
+          &nbsp;
+          <span v-if="product.stock_status === 'limited'">{{ product.stock_qty }}</span>
         </p>
         <p>
           <b>Mayorista:</b> &nbsp;
