@@ -16,4 +16,16 @@ export namespace IVue
     noEdit?: boolean;
   }
 
+  interface QuasarTableColumn
+  {
+    name: string;
+    label: string;
+    field: string;
+    required?: boolean;
+    align?: 'left' | 'center' | 'right',
+    sortable?: boolean;
+    style?: string;
+    classes?: string;
+  }
+
 }

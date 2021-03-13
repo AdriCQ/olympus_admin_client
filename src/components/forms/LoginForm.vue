@@ -57,7 +57,14 @@
 
       <!-- Actions -->
       <q-card-actions align="center">
-        <q-btn color="primary" type="submit" label="Entrar" :loading="btnState" glossy />
+        <q-btn
+          color="primary"
+          text-color="black"
+          type="submit"
+          label="Entrar"
+          :loading="btnState"
+          glossy
+        />
       </q-card-actions>
     </form>
   </q-card>

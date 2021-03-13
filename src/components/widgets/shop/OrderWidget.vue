@@ -132,6 +132,9 @@ import { date } from 'quasar';
   },
 })
 export default class OrderWidget extends Vue {
+  created(){
+    console.log(this.order);
+  }
   @Prop({
     type: Object,
     default: () => {
@@ -158,7 +161,7 @@ export default class OrderWidget extends Vue {
   changeStatus(_status: IShopStore.OrderStatus) {
     this.showTimeDialog = false;
     this.loading = true;
-    // console.log('Before sent', this.deliveryTime);
+    console.log('Before sent', this.deliveryTime);
     void ShopOrderStore.changeOrderStatus({
       order_id: this.order.id,
       status: _status,
@@ -186,7 +189,7 @@ export default class OrderWidget extends Vue {
     this.deliveryTime = date.addToDate(new Date(), {
       minutes: _minutes,
     });
-    // console.log(this.deliveryTime);
+    console.log(this.deliveryTime);
   }
 
   onInputTime(_input: number) {

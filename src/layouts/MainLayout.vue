@@ -11,7 +11,10 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
         <q-toolbar-title></q-toolbar-title>
-        <div>Visitas {{ Number(dailyVisits) }}</div>
+        <div>
+          {{ Number(dailyVisits) }}
+          <q-icon name="mdi-eye-outline" />
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -41,7 +44,7 @@ import { ILabelIconLink, IOlympusService } from 'src/types';
 import { FunctionHelper, PALREY_APP_TOKEN } from 'src/helpers';
 import { ServiceProvider, OlympusService } from 'src/services';
 
-FunctionHelper.notificationsInterval();
+// FunctionHelper.notificationsInterval();
 
 @Component({
   components: {
@@ -78,6 +81,7 @@ export default class MainLayout extends Vue {
     {
       icon: 'mdi-account-multiple-outline',
       label: 'Usuarios',
+      to: { name: 'user.home' },
     },
   ];
 

@@ -4,6 +4,7 @@ import { Store } from 'vuex';
 import { mainRoutes } from './main';
 import { authRoutes } from './auth';
 import { shopRoutes } from './shop';
+import { userRoutes } from './users';
 
 /*
  * If not building with SSR mode, you can
@@ -21,7 +22,7 @@ export default route<Store<unknown>>(function ({ Vue })
         path: '/',
         redirect: { name: 'main.home' }
       },
-      mainRoutes, authRoutes, shopRoutes,
+      mainRoutes, authRoutes, shopRoutes, userRoutes,
       // Always leave this as last one,
       // but you can also remove it
       {

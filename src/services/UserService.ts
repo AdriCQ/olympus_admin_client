@@ -1,4 +1,4 @@
-import { IUserService, IServices } from 'src/types';
+import { IUserService, IServices, IUserStore } from 'src/types';
 import axios from 'axios';
 
 /**
@@ -54,5 +54,17 @@ export class UserService
   static logout ()
   {
     return axios.post('/auth/logout');
+  }
+
+  /**
+   * Filters user service
+   * @param _params 
+   * @returns filter 
+   */
+  static filter (_params: IUserService.FilterRequest): IServices.ApiResponsePaginated<IUserStore.User[]>
+  {
+    return axios.get(this.BASE_PATH + '/filter', {
+      params: _params
+    })
   }
 }

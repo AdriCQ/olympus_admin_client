@@ -58,7 +58,7 @@
             <!-- Attributes -->
             <div
               class="bg-warning q-pa-sm q-ma-sm text-caption"
-            >Es recomendable para la aplicación usar un solo timpo de atributo opcional (Sabor o Relleno)</div>
+            >Es recomendable para la aplicación usar un solo tipo de atributo opcional (Sabor o Relleno)</div>
             <q-select
               v-model="Relleno"
               :options="availableRelleno"

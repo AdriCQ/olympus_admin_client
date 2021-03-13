@@ -30,4 +30,10 @@ export namespace IUserService
     profile: IUserStore.User;
     api_token: string;
   }
+
+  interface FilterRequest
+  {
+    mobile_phone?: string;
+    name?: string;
+  }
 }
