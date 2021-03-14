@@ -19,10 +19,13 @@ export class FunctionHelper
   static handleImage (_image: IImage, _size: 'sm' | 'md' | 'lg' = 'md'): string
   {
     const localImages = [
+      { id: 1, paths: { sm: 'img/default.jpg', md: 'img/default.jpg', lg: 'img/default.jpg' } },
       { id: 2, paths: { sm: 'img/products/sm_2.jpg', md: 'img/products/md_2.jpg', lg: 'img/products/lg_2.jpg' } },
       { id: 3, paths: { sm: 'img/products/sm_3.jpg', md: 'img/products/md_3.jpg', lg: 'img/products/lg_3.jpg' } },
       { id: 4, paths: { sm: 'img/products/sm_4.jpg', md: 'img/products/md_4.jpg', lg: 'img/products/lg_4.jpg' } },
       { id: 5, paths: { sm: 'img/products/sm_5.jpg', md: 'img/products/md_5.jpg', lg: 'img/products/lg_5.jpg' } },
+      { id: 6, paths: { sm: 'img/products/sm_6.jpg', md: 'img/products/md_6.jpg', lg: 'img/products/lg_6.jpg' } },
+      { id: 7, paths: { sm: 'img/products/sm_7.jpg', md: 'img/products/md_7.jpg', lg: 'img/products/lg_7.jpg' } },
     ];
     const search = localImages.find(_findImage =>
     {
