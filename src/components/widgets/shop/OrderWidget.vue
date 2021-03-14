@@ -54,7 +54,7 @@
           {{ `${productOrder.product_qty} -- ${productOrder.product.title}` }}
           <ul v-if="productOrder.product_details">
             <li
-              v-for="(attr, attrKey) in JSON.parse(productOrder.product_details)"
+              v-for="(attr, attrKey) in productOrder.product_details"
               :key="attrKey"
             >{{ `${attrKey}: ${attr}` }}</li>
           </ul>
