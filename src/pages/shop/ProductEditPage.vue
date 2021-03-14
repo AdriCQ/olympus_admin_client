@@ -178,6 +178,9 @@ export default class ProductEditPage extends Mixins(AppMixin) {
 
   get attr(): undefined | IShopStore.ProductAttributes {
     if (!this.Relleno && this.Sabor && this.Color) return undefined;
+    if (!this.Relleno?.length) this.Relleno = null;
+    if (!this.Sabor?.length) this.Sabor = null;
+    if (!this.Color?.length) this.Color = null;
     return {
       Relleno: this.Relleno,
       Sabor: this.Sabor,

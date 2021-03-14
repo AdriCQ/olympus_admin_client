@@ -6,7 +6,7 @@
     <q-card-section>
       <!-- <div class="text-subtitle2">{{ product.title }}</div> -->
       <div class="text-subtitle2">{{ product.title }}, ${{ Number(product.sell_price).toFixed(2) }}</div>
-      <p>Vendidos: {{ Number(product.sold) }}</p>
+      <!-- <p>Vendidos: {{ Number(product.sold) }}</p> -->
       <p>Inventario: {{ String(product.stock_status).toLocaleUpperCase() }}</p>
       <p v-if="product.stock_status === 'limited'">Cantidad: {{ product.stock_qty }}</p>
       <p>
