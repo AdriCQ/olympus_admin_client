@@ -75,8 +75,8 @@ export default class UsersBasicStatsSection extends Vue {
       UserService.filter({
         page: this.currentPage,
       }),
-      (_resp: IServices.PaginatedData<IUserStore.User[]>) => {
-        this.usersData = _resp.data;
+      (_resp: IUserStore.User[]) => {
+        this.usersData = _resp;
       }
     ).catch((_err) => AppStore.handleErrors(_err));
   }
