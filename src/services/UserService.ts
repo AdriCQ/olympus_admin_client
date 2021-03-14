@@ -61,7 +61,7 @@ export class UserService
    * @param _params 
    * @returns filter 
    */
-  static filter (_params?: IUserService.FilterRequest): IServices.ApiResponsePaginated<IUserStore.User[]>
+  static filter (_params?: IUserService.FilterRequest): IServices.ApiResponse<IUserStore.User[]>
   {
     return axios.get(this.BASE_PATH + '/filter', {
       params: _params

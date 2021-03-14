@@ -1,6 +1,6 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-class-modules';
 import { storeInstance } from 'src/store';
-import { IUserService, IUserStore, IServices } from 'src/types';
+import { IUserService, IUserStore } from 'src/types';
 import { UserInstance, CapacitorHelper } from 'src/helpers';
 import { ServiceProvider, UserService } from 'src/services';
 
@@ -43,11 +43,11 @@ class UserModule extends VuexModule
    * @returns action 
    */
   @Action
-  filterAction (_params: IUserService.FilterRequest): Promise<IServices.PaginatedData<IUserStore.User[]>>
+  filterAction (_params: IUserService.FilterRequest): Promise<IUserStore.User[]>
   {
     return new Promise((_resolve, _reject) =>
     {
-      void ServiceProvider.callableService(UserService.filter(_params), (_resp: IServices.PaginatedData<IUserStore.User[]>) =>
+      void ServiceProvider.callableService(UserService.filter(_params), (_resp: IUserStore.User[]) =>
       {
         _resolve(_resp);
       }).catch(_err => _reject(_err))
