@@ -76,4 +76,18 @@ export class ShopOrderService
       }
     })
   }
+
+  /**
+   * Determines whether delete v
+   * @param _order_id 
+   * @returns delete 
+   */
+  public static vDelete (_order_id: number): IServices.ApiResponse<null>
+  {
+    return axios.get(this.BASE_PATH + '/v-delete', {
+      params: {
+        order_id: _order_id
+      }
+    })
+  }
 }

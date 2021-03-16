@@ -43,6 +43,16 @@
     </q-dialog>
     <!-- / Dialog -->
     <q-card-section>
+      <div class="absolute-top-right">
+        <q-btn
+          icon="mdi-delete"
+          color="negative"
+          padding="xs"
+          unelevated
+          style="z-index: 10"
+          @click="deleteOrder"
+        />
+      </div>
       <div class="text-subtitle2">{{ order.customer.name }}</div>
       <div class="text-subtitle2">
         <q-icon name="mdi-phone" />
@@ -60,6 +70,8 @@
           </ul>
         </li>
       </ul>
+      <div class="text-subtitle2">Precio Total: ${{ Number(order.total_price).toFixed(2) }}</div>
+
       <div class="text-subtitle2">
         <span>Dirección</span>
         <q-btn
@@ -87,31 +99,13 @@
     </q-card-section>
     <q-card-actions>
       <q-btn-group push>
-        <q-btn
-          push
-          color="positive"
-          size="sm"
-          v-if="order.status ==='processing'"
-          @click="openAcceptedModal"
-        >
+        <q-btn push color="positive" size="sm" @click="openAcceptedModal">
           <q-icon name="mdi-check" />&nbsp; Aceptar
         </q-btn>
-        <q-btn
-          push
-          color="negative"
-          size="sm"
-          v-if="order.status ==='processing'"
-          @click="changeStatus('v-canceled')"
-        >
+        <q-btn push color="negative" size="sm" @click="changeStatus('v-canceled')">
           <q-icon name="mdi-close" />&nbsp; Cancelar
         </q-btn>
-        <q-btn
-          push
-          color="info"
-          size="sm"
-          v-if="order.status === 'accepted'"
-          @click="changeStatus('completed')"
-        >
+        <q-btn push color="info" size="sm" @click="changeStatus('completed')">
           <q-icon name="mdi-check-all" />&nbsp; Completar
         </q-btn>
       </q-btn-group>
@@ -153,6 +147,16 @@ export default class OrderWidget extends Vue {
     return date;
   }
 
+  get statusName() {
+    return {
+      processing: 'En Proceso',
+      accepted: 'Aceptado',
+      'v-canceled': 'Cancelado por PalRey',
+      'c-canceled': 'Cancelado por el Cliente',
+      completed: 'Completado',
+    };
+  }
+
   get updated_at() {
     return this.order.updated_at
       ? new Date(this.order.updated_at).toLocaleString()
@@ -161,17 +165,47 @@ export default class OrderWidget extends Vue {
 
   changeStatus(_status: IShopStore.OrderStatus) {
     this.showTimeDialog = false;
-    this.loading = true;
     console.log('Before sent', this.deliveryTime);
-    void ShopOrderStore.changeOrderStatus({
-      order_id: this.order.id,
-      status: _status,
-      delivery_time: this.deliveryTime,
-    })
-      // .then((_resp) => console.log(_resp))
-      .catch((_err) => console.log(_err))
-      .finally(() => {
-        this.loading = false;
+    this.$q
+      .dialog({
+        title: 'Confirma',
+        message: `Va a cambiar el estado a ${this.statusName[_status]}`,
+        cancel: true,
+        persistent: false,
+      })
+      .onOk(() => {
+        this.loading = true;
+        void ShopOrderStore.changeOrderStatus({
+          order_id: this.order.id,
+          status: _status,
+          delivery_time: this.deliveryTime,
+        })
+          // .then((_resp) => console.log(_resp))
+          .catch((_err) => console.log(_err))
+          .finally(() => {
+            this.loading = false;
+          });
+      });
+  }
+
+  /**
+   * Delete Order
+   */
+  deleteOrder() {
+    this.$q
+      .dialog({
+        title: 'Confirma',
+        message: 'Va a ELIMINAR el pedido',
+        cancel: true,
+        persistent: false,
+      })
+      .onOk(() => {
+        this.loading = true;
+        void ShopOrderStore.deleteAction(this.order.id)
+          .catch((_err) => console.log(_err))
+          .finally(() => {
+            this.loading = false;
+          });
       });
   }
 

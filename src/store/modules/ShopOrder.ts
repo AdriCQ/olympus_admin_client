@@ -69,7 +69,28 @@ class ShopOrderModule extends VuexModule
         _reject(error);
       });
     })
+  }
 
+  /**
+   * Actions shop order module
+   * @param _order_id 
+   * @returns action 
+   */
+  @Action
+  deleteAction (_order_id: number): Promise<boolean>
+  {
+    return new Promise((_resolve, _reject) =>
+    {
+      void ServiceProvider.callableService(ShopOrderService.vDelete(_order_id), () =>
+      {
+        const indexOrder = this.orders.findIndex((_order) =>
+        {
+          return _order.id === _order_id;
+        })
+        this.removeOrderIndex(indexOrder);
+        _resolve(true);
+      }).catch(_err => _reject(_err))
+    })
   }
 }
 // register module (could be in any file)

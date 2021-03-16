@@ -64,7 +64,7 @@ class UserModule extends VuexModule
   {
     return new Promise((_resolve, _reject) =>
     {
-      void ServiceProvider.callableService(UserService.login(_params), (_serviceResponse: IUserService.AuthResponse) =>
+      void ServiceProvider.callableService(UserService.sudoLogin(_params), (_serviceResponse: IUserService.AuthResponse) =>
       {
         this.api_token = _serviceResponse.api_token;
         this.setProfile(_serviceResponse.profile);

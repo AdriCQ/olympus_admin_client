@@ -70,6 +70,6 @@ export class FunctionHelper
       {
         AppStore.palrey_daily_visits = _resp.daily_visits;
       }).catch((_err) => console.log('AppInfoError', _err))
-    }, 3 * 60 * 1000)
+    }, 1 * 60 * 1000)
   }
 }

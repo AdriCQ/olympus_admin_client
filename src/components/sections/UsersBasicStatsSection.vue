@@ -28,7 +28,7 @@
 
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
-import { IServices, IUserStore, IVue } from 'src/types';
+import { IUserStore, IVue } from 'src/types';
 import { ServiceProvider, UserService } from 'src/services';
 import { AppStore } from 'src/store/modules';
 
