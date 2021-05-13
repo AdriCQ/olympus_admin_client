@@ -127,9 +127,6 @@ import { date } from 'quasar';
   },
 })
 export default class OrderWidget extends Vue {
-  created() {
-    console.log(this.order);
-  }
   @Prop({
     type: Object,
     default: () => {

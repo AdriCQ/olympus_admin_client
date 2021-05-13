@@ -49,4 +49,14 @@ export class OlympusService
   {
     return axios.get(this.BASE_URL + '/app', { params: { app_token: _app_token } });
   }
+
+  /**
+   * Sets app settings
+   * @param _params 
+   * @returns app settings 
+   */
+  static setAppSettings (_params: IOlympusService.SettingsRequest): IServices.ApiResponse<IOlympusService.Application>
+  {
+    return axios.post(this.BASE_URL + '/app/settings', _params);
+  }
 }

@@ -16,6 +16,7 @@ export * from './store/shop';
 export * from './services';
 export * from './services/olympus';
 export * from './services/shop';
+export * from './services/stats';
 export * from './services/user';
 
 /**

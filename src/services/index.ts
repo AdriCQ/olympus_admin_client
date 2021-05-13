@@ -80,3 +80,4 @@ export * from './OlympusService';
 export * from './ShopOrder';
 export * from './ShopProductService';
 export * from './UserService';
+export * from './StatsService';

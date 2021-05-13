@@ -12,6 +12,16 @@ export const mainRoutes: RouteConfig =
       // component: () => import('pages/Index.vue'),
       redirect: { name: 'shop.orders' },
       name: 'main.home'
+    },
+    {
+      path: 'stats',
+      component: () => import('pages/StatsPage.vue'),
+      name: 'main.stats'
+    },
+    {
+      path: 'settings',
+      component: () => import('pages/SettingsPage.vue'),
+      name: 'main.settings'
     }
   ],
 };

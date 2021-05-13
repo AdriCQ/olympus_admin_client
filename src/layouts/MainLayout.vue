@@ -59,7 +59,7 @@ export default class MainLayout extends Vue {
     void ServiceProvider.callableService(
       OlympusService.getAppInfo(PALREY_APP_TOKEN),
       (_resp: IOlympusService.Application) => {
-        AppStore.palrey_daily_visits = _resp.daily_visits;
+        AppStore.palrey = _resp;
       }
     ).catch((_err) => console.log('AppInfoError', _err));
   }
@@ -83,6 +83,17 @@ export default class MainLayout extends Vue {
       label: 'Usuarios',
       to: { name: 'user.home' },
     },
+
+    {
+      icon: 'mdi-chart-line',
+      label: 'Estadísticas',
+      to: { name: 'main.stats' },
+    },
+    {
+      icon: 'mdi-wrench',
+      label: 'Ajustes',
+      to: { name: 'main.settings' },
+    },
   ];
 
   get appVersion() {
@@ -90,7 +101,7 @@ export default class MainLayout extends Vue {
   }
 
   get dailyVisits() {
-    return AppStore.palrey_daily_visits;
+    return AppStore.palrey?.daily_visits;
   }
 
   get userName() {

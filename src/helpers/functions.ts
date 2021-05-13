@@ -68,7 +68,7 @@ export class FunctionHelper
        */
       void ServiceProvider.callableService(OlympusService.getAppInfo(PALREY_APP_TOKEN), (_resp: IOlympusService.Application) =>
       {
-        AppStore.palrey_daily_visits = _resp.daily_visits;
+        AppStore.palrey = _resp;
       }).catch((_err) => console.log('AppInfoError', _err))
     }, 1 * 60 * 1000)
   }

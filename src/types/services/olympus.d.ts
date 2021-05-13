@@ -22,6 +22,19 @@ export namespace IOlympusService
     min_required_version: number;
     update_required: boolean;
     roadmap: string[];
+    settings?: {
+      min_price: number;
+      extra_price: number;
+      enable: boolean;
+    }
     daily_visits: number;
+  }
+
+  interface SettingsRequest
+  {
+    ol_app_token: string;
+    min_price: number;
+    extra_price: number;
+    enable: boolean;
   }
 }

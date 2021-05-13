@@ -54,7 +54,7 @@ export default class UploadImagePopup extends Vue {
       // simulating a delay of 2 seconds
       setTimeout(() => {
         resolve({
-          url: `${SERVER_URL}/shop/product/v-upload-image`,
+          url: `${SERVER_URL}/api/shop/product/v-upload-image`,
           formFields: [
             { name: 'product_id', value: this.product.id },
             { name: 'ol_app_token', value: APP_TOKEN },
