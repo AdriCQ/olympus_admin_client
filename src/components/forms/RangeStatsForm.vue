@@ -49,7 +49,7 @@ export default class RangeStatsForm extends Vue {
           console.log(_resp);
           this.$emit('result', _resp.data);
         })
-        .catch((_err) => AppStore.handleErrors(['Error']))
+        .catch((_err) => AppStore.handleErrors(_err))
         .finally(() => (this.btnLoading = false));
     } else {
       StatsService.stats({
@@ -59,7 +59,7 @@ export default class RangeStatsForm extends Vue {
           console.log(_resp);
           this.$emit('result', _resp.data);
         })
-        .catch((_err) => AppStore.handleErrors(['Error']))
+        .catch((_err) => AppStore.handleErrors(_err))
         .finally(() => (this.btnLoading = false));
     }
   }

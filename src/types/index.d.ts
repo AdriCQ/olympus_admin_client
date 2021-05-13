@@ -25,4 +25,11 @@ export * from './services/user';
  * -----------------------------------------
  */
 export * from './mix'
-export * from './vue_components'
+export * from './vue_components';
+
+/**
+ * -----------------------------------------
+ *	Modules
+ * -----------------------------------------
+ */
+export * from './modules/announcement';

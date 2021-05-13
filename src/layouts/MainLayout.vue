@@ -90,6 +90,11 @@ export default class MainLayout extends Vue {
       to: { name: 'main.stats' },
     },
     {
+      icon: 'mdi-image-filter-none',
+      label: 'Anuncios',
+      to: { name: 'main.ann' },
+    },
+    {
       icon: 'mdi-wrench',
       label: 'Ajustes',
       to: { name: 'main.settings' },

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IServices, IOlympusService } from 'src/types';
+import { IServices, IOlympusService, IAnnouncement } from 'src/types';
 
 /**
  * 
@@ -58,5 +58,45 @@ export class OlympusService
   static setAppSettings (_params: IOlympusService.SettingsRequest): IServices.ApiResponse<IOlympusService.Application>
   {
     return axios.post(this.BASE_URL + '/app/settings', _params);
+  }
+
+  /**
+   * Lists announcements
+   * @returns  
+   */
+  static listAnnouncements (): IServices.ApiResponse<IAnnouncement.Announcement[]>
+  {
+    return axios.get(this.BASE_URL + '/announcement/v-list');
+  }
+
+  /**
+   * Create announcements
+   * @returns  
+   */
+  static createAnnouncement (_param: IAnnouncement.CreateRequest): IServices.ApiResponse<IAnnouncement.Announcement>
+  {
+    return axios.post(this.BASE_URL + '/announcement', _param);
+  }
+
+  /**
+   * Update announcements
+   * @returns  
+   */
+  static updateAnnouncement (_param: IAnnouncement.UpdateRequest): IServices.ApiResponse<IAnnouncement.Announcement>
+  {
+    return axios.post(this.BASE_URL + '/announcement/update', _param);
+  }
+
+  /**
+   * Remove announcements
+   * @returns  
+   */
+  static removeAnnouncement (_id: number): IServices.ApiResponse<boolean>
+  {
+    return axios.get(this.BASE_URL + '/announcement/remove', {
+      params: {
+        announcement_id: _id
+      }
+    });
   }
 }
