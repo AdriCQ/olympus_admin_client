@@ -24,11 +24,13 @@
                 class="col-6"
                 v-model="product.sell_price"
                 type="number"
+                step="0.01"
                 label="Precio Venta"
               />
               <q-input
                 class="col-6"
                 v-model="product.production_price"
+                step="0.01"
                 type="number"
                 label="Precio Producción"
               />
@@ -169,11 +171,39 @@ export default class ProductEditPage extends Mixins(AppMixin) {
   }
 
   get availableSabor() {
-    return ['Almendra', 'Chocolate', 'Fresa', 'Vainilla'];
+    return [
+      'Almendra',
+      'Caramelo',
+      'Chirimoya',
+      'Chocolate',
+      'Coco',
+      'Fresa',
+      'Guayaba',
+      'Mamey',
+      'Mango',
+      'Mantecado',
+      'Tamarindo',
+      'Vainilla',
+    ];
   }
 
   get availableRelleno() {
-    return ['Coco', 'Guayaba', 'Chocolate', 'Natilla'];
+    return [
+      'Almendra',
+      'Caramelo',
+      'Chirimoya',
+      'Chocolate',
+      'Coco',
+      'Fresa',
+      'Guayaba',
+      'Mamey',
+      'Mango',
+      'Mantecado',
+      'Miel',
+      'Natilla',
+      'Tamarindo',
+      'Vainilla',
+    ];
   }
 
   get attr(): undefined | IShopStore.ProductAttributes {

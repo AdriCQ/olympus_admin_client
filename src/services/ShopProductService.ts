@@ -4,6 +4,16 @@ import axios from 'axios';
 export class ShopProductService
 {
   private static BASE_PATH = '/shop/product';
+  
+  /**
+   * Gets by id
+   * @param _params 
+   * @returns IServices.ApiResponse<IShopStore.Product>
+   */
+  public static create (): IServices.ApiResponse<IShopStore.Product>
+  {
+    return axios.post(this.BASE_PATH + '/new');
+  }
 
   /**
    * Gets by id

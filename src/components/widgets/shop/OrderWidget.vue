@@ -70,7 +70,13 @@
           </ul>
         </li>
       </ul>
-      <div class="text-subtitle2">Precio Total: ${{ Number(order.total_price).toFixed(2) }}</div>
+      <div
+        class="text-subtitle2"
+        v-if="Number(order.tax) > 0"
+      >Precio Extra: ${{ Number(order.tax).toFixed(2) }}</div>
+      <div
+        class="text-subtitle2"
+      >Precio Total: ${{ Number(order.total_price + order.tax).toFixed(2) }}</div>
 
       <div class="text-subtitle2">
         <span>Dirección</span>

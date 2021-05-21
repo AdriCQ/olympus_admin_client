@@ -39,6 +39,24 @@ class ShopProductModule extends VuexModule
     }));
     this.products[index] = _params.product;
   }
+  
+  /**
+   * Actions get shop product by id
+   * @param _id 
+   * @returns Promise<IShopStore.Product>
+   */
+  @Action
+  createAction ()
+  {
+    return new Promise((_resolve, _reject) =>
+    {
+      void ServiceProvider.callableService(ShopProductService.create(), () =>
+      {
+        _resolve(true);
+      }).catch(_error => _reject(_error));
+
+    });
+  }
 
   /**
    * Actions get shop product by id

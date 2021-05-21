@@ -3,6 +3,7 @@
     <q-card>
       <q-card-section>
         <div class="text-h6">Listado de Productos</div>
+        <q-btn label="Nuevo" icon="mdi-plus" color="positive" dense @click="newProduct" />
       </q-card-section>
       <q-card-section>
         <div class="row q-col-gutter-sm">
@@ -52,6 +53,10 @@ export default class ProductListSection extends Vue {
 
   get products() {
     return ShopProductStore.products;
+  }
+  
+  newProduct(){
+  	ShopProductStore.createAction().catch((_err) => AppStore.handleErrors(_err))
   }
 }
 </script>
