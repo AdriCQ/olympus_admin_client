@@ -30,6 +30,10 @@
         <br />
         <b>Total de entrada: ${{ Number(stats.total_money).toFixed(2) }}</b>
         <br />
+        <b>Total de inversion: ${{ Number(stats.inversion).toFixed(2) }}</b>
+        <br />
+        <b>Total de Ganancia: ${{ Number(stats.earn).toFixed(2) }}</b>
+        <br />
       </q-card-section>
     </q-card>
   </q-page>

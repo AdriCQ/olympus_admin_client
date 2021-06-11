@@ -17,5 +17,7 @@ export namespace IStatsService
     cant_pedidos: number;
     money_products: IDictionary<number>[];
     cant_products: IDictionary<number>[];
+    earn: number;
+    inversion: number;
   }
 }
