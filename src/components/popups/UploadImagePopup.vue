@@ -36,12 +36,18 @@
 import { UserStore } from 'src/store/modules';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { SERVER_URL, APP_TOKEN } from 'src/helpers';
-import { IShopStore } from 'src/types';
+import { IAnnouncement, IShopStore } from 'src/types';
 
 @Component
 export default class UploadImagePopup extends Vue {
   @Prop(Boolean) readonly value!: boolean;
   @Prop(Object) readonly product!: IShopStore.Product;
+  @Prop(Object) readonly announcement!: IAnnouncement.Announcement;
+
+  get mode() {
+    if (this.announcement) return 'announcement';
+    return 'product';
+  }
 
   onUploaded(/* info: unknown */) {
     this.$router.back();
@@ -53,21 +59,39 @@ export default class UploadImagePopup extends Vue {
     return new Promise((resolve) => {
       // simulating a delay of 2 seconds
       setTimeout(() => {
-        resolve({
-          url: `${SERVER_URL}/api/shop/product/v-upload-image`,
-          formFields: [
-            { name: 'product_id', value: this.product.id },
-            { name: 'ol_app_token', value: APP_TOKEN },
-          ],
-          method: 'POST',
-          headers: [
-            {
-              name: 'Authorization',
-              value: `Bearer ${String(UserStore.api_token)}`,
-            },
-          ],
-          fieldName: 'image',
-        });
+        if (this.mode === 'product') {
+          resolve({
+            url: `${SERVER_URL}/api/shop/product/v-upload-image`,
+            formFields: [
+              { name: 'product_id', value: this.product.id },
+              { name: 'ol_app_token', value: APP_TOKEN },
+            ],
+            method: 'POST',
+            headers: [
+              {
+                name: 'Authorization',
+                value: `Bearer ${String(UserStore.api_token)}`,
+              },
+            ],
+            fieldName: 'image',
+          });
+        } else if (this.mode === 'announcement') {
+          resolve({
+            url: `${SERVER_URL}/api/olympus/announcement/image`,
+            formFields: [
+              { name: 'announcement_id', value: this.announcement.id },
+              { name: 'ol_app_token', value: APP_TOKEN },
+            ],
+            method: 'POST',
+            headers: [
+              {
+                name: 'Authorization',
+                value: `Bearer ${String(UserStore.api_token)}`,
+              },
+            ],
+            fieldName: 'image',
+          });
+        }
       }, 200);
     });
   }

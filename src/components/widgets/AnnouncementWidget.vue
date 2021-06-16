@@ -1,6 +1,9 @@
 <template>
   <q-card class="text-center">
-    <q-card-section>
+    <q-card-section v-if="announcement.image">
+      <q-img :src="imageSrc" width="120px" spinner-color="primary" spinner-size="82px" />
+    </q-card-section>
+    <q-card-section v-else>
       <q-icon :name="announcement.icon" v-if="announcement.icon" size="32px" />
       <p class="text-h6" v-if="announcement.title">{{ announcement.title }}</p>
       <p v-if="announcement.text">{{ announcement.text }}</p>
@@ -19,6 +22,7 @@
 </template>
 
 <script lang='ts'>
+import { FunctionHelper } from 'src/helpers';
 import { AnnouncementStore } from 'src/store/modules';
 import { IAnnouncement } from 'src/types';
 import { Vue, Component, Prop } from 'vue-property-decorator';
@@ -29,6 +33,10 @@ export default class extends Vue {
 
   loading = false;
 
+  get imageSrc() {
+    if (this.announcement.image)
+      return FunctionHelper.handleImage(this.announcement.image, 'lg');
+  }
   edit() {
     AnnouncementStore._announcement = this.announcement;
     this.$router

@@ -19,15 +19,25 @@
             type="submit"
           />
           <q-btn
+            color="positive"
+            :loading="loading"
+            icon="mdi-file-image"
+            label="Imagen"
+            v-if="!form.image"
+            @click="showUploadImage = true"
+          />
+          <q-btn
             color="negative"
             :loading="loading"
-            icon="mdi-close"
-            label="Eliminar"
-            @click="remove"
+            icon="mdi-image-broken"
+            label="Quitar Imagen"
+            v-if="form.image"
+            @click="form.image = undefined"
           />
         </q-card-actions>
       </q-card>
     </q-form>
+    <upload-image-popup v-model="showUploadImage" v-if="announcement" :announcement="announcement" />
   </q-page>
 </template>
 
@@ -36,7 +46,12 @@ import { AnnouncementStore } from 'src/store/modules';
 import { IAnnouncement } from 'src/types';
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component({
+  components: {
+    'upload-image-popup': () =>
+      import('components/popups/UploadImagePopup.vue'),
+  },
+})
 export default class EditAnnouncement extends Vue {
   beforeMount() {
     this.form = {
@@ -48,6 +63,7 @@ export default class EditAnnouncement extends Vue {
       link: this.announcement?.link,
       icon: this.announcement?.icon,
       html: this.announcement?.html,
+      image: this.announcement?.image,
     };
   }
 
@@ -60,9 +76,12 @@ export default class EditAnnouncement extends Vue {
     link: undefined,
     icon: undefined,
     html: undefined,
+    image: undefined,
   };
 
   loading = false;
+
+  showUploadImage = false;
 
   get announcement() {
     return AnnouncementStore.announcement;

@@ -87,6 +87,11 @@ export class OlympusService
     return axios.post(this.BASE_URL + '/announcement/update', _param);
   }
 
+  // static uploadAnnouncementImage (_params): IServices.ApiResponse<IAnnouncement.Announcement>
+  // {
+  //   return axios.post(this.BASE_URL + '/announcement/image', _params)
+  // }
+
   /**
    * Remove announcements
    * @returns  
