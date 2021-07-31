@@ -30,6 +30,8 @@ export namespace IShopStore
     coordinates: IVue.ILatLng;
     total_products: number;
     status: OrderStatus;
+    delivery_time?: string;
+    request_time?: string;
   }
 
   interface OrderProduct extends DBModel

@@ -91,16 +91,25 @@
       </div>
       <p>{{ order.shipping_address }}</p>
       <template v-if="order.message">
-        <div class="text-subtitle2">Mensaje</div>
-        <p>{{ order.message }}</p>
+        <!-- Messages -->
+        <div class="q-px-sm row justify-center">
+          <div style="width: 100%">
+            <q-chat-message size="10" :text="[order.message]" />
+          </div>
+        </div>
+        <!-- / Messages -->
+      </template>
+      <template v-if="request_time">
+        <div class="text-subtitle2">Lo quiero para:</div>
+        <p>{{ request_time }}</p>
       </template>
       <template v-if="order.status !== 'accepted'">
-        <div class="text-subtitle2">Fecha</div>
-        <p>{{ updated_at }}</p>
+        <div class="text-subtitle2">Creado:</div>
+        <p>{{ created_at }}</p>
       </template>
       <template v-else>
         <div class="text-subtitle2">Tiempo de entrega</div>
-        <p>{{ vDate.getDateDiff(order.delivery_time, new Date(), 'minutes') }} minutos</p>
+        <p>{{ delivery_time }}</p>
       </template>
     </q-card-section>
     <q-card-actions>
@@ -146,8 +155,45 @@ export default class OrderWidget extends Vue {
   showTimeInput = false;
   deliveryTime: Date | null = null;
 
-  get vDate() {
-    return date;
+  get created_at() {
+    return this.order.created_at
+      ? new Date(this.order.created_at).toLocaleString()
+      : null;
+  }
+  get delivery_time() {
+    if (this.order.delivery_time) {
+      const deliveryTime = new Date(this.order.delivery_time);
+      const diffHours = date.getDateDiff(deliveryTime, new Date(), 'hours');
+      const diffDays = date.getDateDiff(deliveryTime, new Date(), 'days');
+      const diffMinutes = date.getDateDiff(deliveryTime, new Date(), 'minutes');
+      if (diffMinutes < 0) {
+        if (diffHours < -24) {
+          return `Hace ${diffDays * -1} ${diffDays < -1 ? 'días' : 'día'}, ${
+            (diffHours * -1) % 24
+          }h y ${(diffMinutes * -1) % 60}min`;
+        } else if (diffHours < -1) {
+          return `Hace ${diffHours * -1}h y ${(diffMinutes * -1) % 60}min`;
+        } else {
+          return `Hace ${diffMinutes * -1}min`;
+        }
+      }
+      if (diffHours > 24) {
+        return `${diffDays} ${diffDays > 1 ? 'días' : 'día'}, ${
+          diffHours % 24
+        }h y ${diffMinutes % 60}min`;
+      } else if (diffHours > 0) {
+        return `${diffHours}h y ${diffMinutes % 60}min`;
+      } else {
+        return `${diffMinutes}min`;
+      }
+    }
+    return false;
+  }
+
+  get request_time() {
+    return this.order.request_time
+      ? new Date(this.order.request_time).toLocaleString()
+      : null;
   }
 
   get statusName() {
@@ -160,10 +206,8 @@ export default class OrderWidget extends Vue {
     };
   }
 
-  get updated_at() {
-    return this.order.updated_at
-      ? new Date(this.order.updated_at).toLocaleString()
-      : null;
+  get vDate() {
+    return date;
   }
 
   changeStatus(_status: IShopStore.OrderStatus) {
