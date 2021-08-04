@@ -1,3 +1,4 @@
+import { IUserStore } from 'src/types';
 /**
  * Iroute link
  */
@@ -61,4 +62,11 @@ export interface QSelectOption<T>
 {
   label: string;
   value: T;
+}
+
+export interface IComment
+{
+  user: IUserStore.User;
+  subject: string;
+  message: string;
 }

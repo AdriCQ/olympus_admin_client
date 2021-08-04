@@ -10,7 +10,9 @@
         </q-card-section>
 
         <q-card-section>
-          <div class="text-subtitle text-center">{{ vDate.formatDate(deliveryTime, 'hh:mm:ss') }}</div>
+          <div
+            class="text-subtitle text-center"
+          >{{ vDate.formatDate(deliveryTime, 'YYYY/MM/DD hh:mm a') }}</div>
 
           <q-btn-group class="q-mt-md" push>
             <q-btn label="+15" @click="addToDeliveryTime(15)" />
@@ -18,19 +20,29 @@
             <q-btn label="+60" @click="addToDeliveryTime(60)" />
             <q-btn icon="mdi-calendar" @click="showTimeInput = !showTimeInput" />
           </q-btn-group>
+          <div v-if="request_time">
+            Solicitud:
+            <q-chip
+              icon="mdi-calendar"
+              clickable
+              @click="setDeliveryTime(request_time)"
+              :label="request_time"
+            />
+          </div>
           <div class="q-mt-sm" v-if="showTimeInput">
             <p class="q-mb-sm">Tiempo Personalizado</p>
-            <q-input
-              type="number"
-              dense
-              value="0"
-              outlined
-              suffix="minutos"
-              min="0"
-              @input="onInputTime"
-            >
+            <q-input type="number" dense value="0" outlined min="0" @input="onInputTime">
               <template v-slot:prepend>
                 <q-icon name="mdi-clock" />
+              </template>
+              <template v-slot:append>
+                <q-chip
+                  style="width:5rem; text-align:center"
+                  class="glossy"
+                  clickable
+                  @click="toggleMetric"
+                  :label="timeMetric"
+                />
               </template>
             </q-input>
           </div>
@@ -154,6 +166,7 @@ export default class OrderWidget extends Vue {
   showTimeDialog = false;
   showTimeInput = false;
   deliveryTime: Date | null = null;
+  timeMetric: 'days' | 'hours' | 'minutes' = 'minutes';
 
   get created_at() {
     return this.order.created_at
@@ -191,9 +204,9 @@ export default class OrderWidget extends Vue {
   }
 
   get request_time() {
-    return this.order.request_time
-      ? new Date(this.order.request_time).toLocaleString()
-      : null;
+    if (this.order?.request_time)
+      return date.formatDate(this.order.request_time, 'YYYY/MM/DD hh:mm a');
+    return null;
   }
 
   get statusName() {
@@ -262,14 +275,25 @@ export default class OrderWidget extends Vue {
     this.deliveryTime = new Date();
   }
 
+  setDeliveryTime(_t: string) {
+    if (date.isValid(_t)) this.deliveryTime = new Date(_t);
+    console.log('DeliveryTIme', this.deliveryTime);
+  }
+
+  toggleMetric() {
+    if (this.timeMetric === 'days') this.timeMetric = 'minutes';
+    else if (this.timeMetric === 'minutes') this.timeMetric = 'hours';
+    else this.timeMetric = 'days';
+  }
+
   closeTimeDialog() {
     this.showTimeDialog = false;
     this.deliveryTime = null;
   }
 
-  addToDeliveryTime(_minutes = 60) {
+  addToDeliveryTime(_time = 60) {
     this.deliveryTime = date.addToDate(new Date(), {
-      minutes: _minutes,
+      [this.timeMetric]: _time,
     });
     console.log(this.deliveryTime);
   }

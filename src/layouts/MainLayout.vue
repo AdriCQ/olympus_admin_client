@@ -83,7 +83,11 @@ export default class MainLayout extends Vue {
       label: 'Usuarios',
       to: { name: 'user.home' },
     },
-
+    {
+      icon: 'mdi-comment-multiple-outline',
+      label: 'Comentarios',
+      to: { name: 'main.comments' },
+    },
     {
       icon: 'mdi-chart-line',
       label: 'Estadísticas',

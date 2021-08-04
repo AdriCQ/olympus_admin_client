@@ -19,6 +19,11 @@ export const mainRoutes: RouteConfig =
       name: 'main.stats'
     },
     {
+      path: 'comments',
+      component: () => import('pages/CommentsPage.vue'),
+      name: 'main.comments'
+    },
+    {
       path: 'settings',
       component: () => import('pages/SettingsPage.vue'),
       name: 'main.settings'
