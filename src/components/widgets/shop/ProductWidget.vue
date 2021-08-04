@@ -1,7 +1,7 @@
 <template>
   <q-card class="cursor-pointer">
     <div class="text-center">
-      <img :src="imageSrc" spinner-color="primary" style="width: 100%" />
+      <q-img :src="imageSrc" spinner-color="primary" style="width: 100%" :ratio="4/3" />
     </div>
     <q-card-section>
       <!-- <div class="text-subtitle2">{{ product.title }}</div> -->
