@@ -130,13 +130,13 @@ module.exports = configure(function (ctx) {
     pwa: {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {
-	skipWaiting: true,
+        skipWaiting: true,
         clientsClaim: true
       }, // only for GenerateSW
       manifest: {
         name: 'Palrey - Admin',
         short_name: 'PalreyAdmin',
-        description: 'Palrey administration',
+        description: 'Palrey Administration',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
