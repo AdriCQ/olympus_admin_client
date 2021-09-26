@@ -1,20 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        Olympus {
-            storeFile file('/mnt/Datos/Installers/Android/linux-final/deploy-key.jks')
-            storePassword 'KxH_621190719960'
-            keyAlias 'Olympus'
-            keyPassword 'KxH_621190719960'
-        }
-    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.olympus.app.palreyadmin"
+        applicationId "net.nairda.palreyadmin"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
+        versionCode 1
         versionName "1.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

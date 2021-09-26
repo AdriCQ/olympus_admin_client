@@ -1,4 +1,4 @@
-package org.capacitor.quasar.app;
+package net.nairda.palreyadmin;
 
 import android.os.Bundle;
 

@@ -1,5 +1,5 @@
 {
-  "appId": "org.capacitor.quasar.app",
+  "appId": "net.nairda.palreyadmin",
   "appName": "Palrey-Admin",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
