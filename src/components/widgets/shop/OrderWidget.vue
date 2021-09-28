@@ -143,7 +143,7 @@
 
 <script lang='ts'>
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { OrderInstance } from 'src/helpers';
+import { FunctionHelper, OrderInstance } from 'src/helpers';
 import { IShopStore } from 'src/types';
 import { ShopOrderStore } from 'src/store/modules';
 import { date } from 'quasar';
@@ -176,29 +176,8 @@ export default class OrderWidget extends Vue {
   get delivery_time() {
     if (this.order.delivery_time) {
       const deliveryTime = new Date(this.order.delivery_time);
-      const diffHours = date.getDateDiff(deliveryTime, new Date(), 'hours');
-      const diffDays = date.getDateDiff(deliveryTime, new Date(), 'days');
       const diffMinutes = date.getDateDiff(deliveryTime, new Date(), 'minutes');
-      if (diffMinutes < 0) {
-        if (diffHours < -24) {
-          return `Hace ${diffDays * -1} ${diffDays < -1 ? 'días' : 'día'}, ${
-            (diffHours * -1) % 24
-          }h y ${(diffMinutes * -1) % 60}min`;
-        } else if (diffHours < -1) {
-          return `Hace ${diffHours * -1}h y ${(diffMinutes * -1) % 60}min`;
-        } else {
-          return `Hace ${diffMinutes * -1}min`;
-        }
-      }
-      if (diffHours > 24) {
-        return `${diffDays} ${diffDays > 1 ? 'días' : 'día'}, ${
-          diffHours % 24
-        }h y ${diffMinutes % 60}min`;
-      } else if (diffHours > 0) {
-        return `${diffHours}h y ${diffMinutes % 60}min`;
-      } else {
-        return `${diffMinutes}min`;
-      }
+      return FunctionHelper.getTimeString(diffMinutes);
     }
     return false;
   }

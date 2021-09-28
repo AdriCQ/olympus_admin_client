@@ -72,4 +72,41 @@ export class FunctionHelper
       }).catch((_err) => console.log('AppInfoError', _err))
     }, 1 * 60 * 1000)
   }
+  static getTimeString (_min = 0)
+  {
+    let mins = _min;
+    let hours = 0;
+    let days = 0;
+    const text = {
+      bef: 'En',
+      days: '',
+      hours: '',
+      mins: ''
+    };
+    if (_min < 0)
+    {
+      mins = _min * -1;
+      text.bef = 'Hace';
+    } else
+    {
+      mins = _min;
+    }
+    if (mins > 60)
+    {
+      hours = Math.floor(mins / 60);
+      mins = mins % 60;
+      if (hours > 24)
+      {
+        days = Math.floor(hours / 24);
+        hours = hours % 24;
+      }
+      text.mins = mins > 0 ? `${mins} min` : ''
+      text.hours = hours > 0 ? `${hours} horas` : ''
+      text.days = days > 0 ? `${days} días` : ''
+    } else
+    {
+      text.mins = `${mins}min`;
+    }
+    return `${text.bef} ${text.days} ${text.hours} ${text.mins}`;
+  }
 }
